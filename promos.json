@@ -1,547 +1,569 @@
 [
-{
-"id": "binance-card",
-"medio": "Binance Card (USDT)",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.03,
-"tope": 160000,
-"periodo": "mes",
-"minimo": 0,
-"costo": 0.0075,
-"vence": "2026-12-31",
-"nota": "3% en USDC, tope 100 USDC/mes (~$160.000). Costo = comprar USDT en P2P y que la tarjeta lo convierta.",
-"rubro": "*"
-},
-{
-"id": "letsbit",
-"medio": "Let'sBit (pesos)",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.025,
-"tope": 30000,
-"periodo": "mes",
-"minimo": 0,
-"costo": 0,
-"vence": "",
-"nota": "2,5% pagando en pesos, tope $30.000/mes. Dato de 2024: verificá que siga vigente.",
-"rubro": "*"
-},
-{
-"id": "ripio-cripto",
-"medio": "Ripio Card (cripto)",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.02,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0.015,
-"grupo": "ripio",
-"vence": "",
-"nota": "2% en USDT/BTC/ETH (4% los primeros 30 días). Costo por spread de Ripio.",
-"rubro": "*"
-},
-{
-"id": "ripio-pesos",
-"medio": "Ripio Card (pesos)",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.005,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0,
-"grupo": "ripio",
-"vence": "",
-"nota": "0,5% pagando en pesos (1% los primeros 30 días).",
-"rubro": "*"
-},
-{
-"id": "lemon-pesos",
-"medio": "Lemon (pesos)",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.0025,
-"tope": 30000,
-"periodo": "mes",
-"minimo": 0,
-"costo": 0,
-"grupo": "lemon",
-"vence": "",
-"nota": "0,25% en BTC desde el 1/9/2026. Tope $30.000/mes compartido.",
-"rubro": "*"
-},
-{
-"id": "lemon-cripto",
-"medio": "Lemon (cripto)",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.02,
-"tope": 30000,
-"periodo": "mes",
-"minimo": 0,
-"costo": 0.037,
-"grupo": "lemon",
-"vence": "",
-"nota": "2% en BTC, pero 0,5% de fee + spread de Lemon: sale negativo.",
-"rubro": "*"
-},
-{
-"id": "bybit-card",
-"medio": "Bybit Card",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.01,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0.023,
-"vence": "",
-"nota": "1% sin VIP (2-10% con VIP). Fee 0,9% por conversión + spread.",
-"rubro": "*"
-},
-{
-"id": "buenbit-stockback",
-"medio": "Buenbit Stockback",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.01,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0,
-"vence": "",
-"nota": "1% en acciones o cripto de la marca donde comprás. Verificá condiciones.",
-"rubro": "*"
-},
-{
-"id": "fiwind-colectivo",
-"medio": "Fiwind",
-"donde": [
-"Colectivo"
-],
-"dias": [],
-"pct": 0.5,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0,
-"vence": "",
-"nota": "50% en colectivos pagando con la tarjeta vía Apple Pay o Google Pay. Tope no publicado.",
-"rubro": "Transporte"
-},
-{
-"id": "mp-carrefour",
-"medio": "Mercado Pago",
-"donde": [
-"Carrefour"
-],
-"dias": [
-1
-],
-"pct": 0.15,
-"tope": 15000,
-"periodo": "mes",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Lunes, pagando con QR.",
-"rubro": "Supermercados"
-},
-{
-"id": "mp-changomas",
-"medio": "Mercado Pago",
-"donde": [
-"ChangoMás"
-],
-"dias": [
-2
-],
-"pct": 0.15,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Martes, pagando con QR. Sin tope.",
-"rubro": "Supermercados"
-},
-{
-"id": "mp-dia",
-"medio": "Mercado Pago",
-"donde": [
-"Día"
-],
-"dias": [
-3
-],
-"pct": 0.15,
-"tope": null,
-"periodo": null,
-"minimo": 20000,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Miércoles, QR, compra mínima $20.000. Sin tope.",
-"rubro": "Supermercados"
-},
-{
-"id": "nx-jumbo",
-"medio": "Naranja X",
-"donde": [
-"Jumbo"
-],
-"dias": [
-5,
-6,
-0
-],
-"pct": 0.3,
-"tope": 12000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"grupo": "nx-epico",
-"vence": "2026-09-30",
-"nota": "Plan Épico. Tope semanal compartido con Día.",
-"rubro": "Supermercados"
-},
-{
-"id": "nx-dia",
-"medio": "Naranja X",
-"donde": [
-"Día"
-],
-"dias": [
-2
-],
-"pct": 0.3,
-"tope": 12000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"grupo": "nx-epico",
-"vence": "2026-09-30",
-"nota": "Plan Épico. Tope semanal compartido con Jumbo.",
-"rubro": "Supermercados"
-},
-{
-"id": "nx-changomas",
-"medio": "Naranja X",
-"donde": [
-"ChangoMás"
-],
-"dias": [
-5,
-6,
-0
-],
-"pct": 0.15,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Sin tope.",
-"rubro": "Supermercados"
-},
-{
-"id": "galicia-jumbo",
-"medio": "Galicia",
-"donde": [
-"Jumbo"
-],
-"dias": [
-2,
-4
-],
-"pct": 0.2,
-"tope": 25000,
-"periodo": "mes",
-"minimo": 100000,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Compra mínima $100.000.",
-"rubro": "Supermercados"
-},
-{
-"id": "galicia-dia",
-"medio": "Galicia",
-"donde": [
-"Día"
-],
-"dias": [
-5,
-6
-],
-"pct": 0.2,
-"tope": 20000,
-"periodo": "mes",
-"minimo": 35000,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Compra mínima $35.000.",
-"rubro": "Supermercados"
-},
-{
-"id": "macro-jumbo",
-"medio": "Macro",
-"donde": [
-"Jumbo"
-],
-"dias": [
-2,
-4
-],
-"pct": 0.2,
-"tope": 25000,
-"periodo": "mes",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "",
-"rubro": "Supermercados"
-},
-{
-"id": "modo-jumbo",
-"medio": "MODO",
-"donde": [
-"Jumbo"
-],
-"dias": [
-2,
-4
-],
-"pct": 0.2,
-"tope": 25000,
-"periodo": "mes",
-"minimo": 100000,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Compra mínima $100.000.",
-"rubro": "Supermercados"
-},
-{
-"id": "santander-jumbo",
-"medio": "Santander",
-"donde": [
-"Jumbo"
-],
-"dias": [
-2,
-4
-],
-"pct": 0.2,
-"tope": 25000,
-"periodo": "mes",
-"minimo": 100000,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Compra mínima $100.000.",
-"rubro": "Supermercados"
-},
-{
-"id": "bna-carrefour",
-"medio": "Banco Nación",
-"donde": [
-"Carrefour"
-],
-"dias": [
-1,
-2,
-3,
-4,
-5
-],
-"pct": 0.05,
-"tope": 5000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "",
-"rubro": "Supermercados"
-},
-{
-"id": "bna-changomas",
-"medio": "Banco Nación",
-"donde": [
-"ChangoMás"
-],
-"dias": [
-3
-],
-"pct": 0.35,
-"tope": 15000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "",
-"rubro": "Supermercados"
-},
-{
-"id": "dni-cercania",
-"medio": "Cuenta DNI",
-"donde": [
-"*"
-],
-"dias": [
-1,
-2,
-3,
-4,
-5
-],
-"pct": 0.2,
-"tope": 6000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "",
-"rubro": "Comercio de barrio"
-},
-{
-"id": "dni-ferias",
-"medio": "Cuenta DNI",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.4,
-"tope": 6000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Ferias y mercados bonaerenses.",
-"rubro": "Ferias y mercados"
-},
-{
-"id": "dni-gastro",
-"medio": "Cuenta DNI",
-"donde": [
-"*"
-],
-"dias": [
-6,
-0
-],
-"pct": 0.25,
-"tope": 8000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "",
-"rubro": "Gastronomía"
-},
-{
-"id": "dni-ypf",
-"medio": "Cuenta DNI",
-"donde": [
-"YPF Full"
-],
-"dias": [
-6,
-0
-],
-"pct": 0.25,
-"tope": 8000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Solo comida en YPF Full.",
-"rubro": "Combustible"
-},
-{
-"id": "dni-farmacia",
-"medio": "Cuenta DNI",
-"donde": [
-"*"
-],
-"dias": [
-3,
-4
-],
-"pct": 0.1,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Sin tope.",
-"rubro": "Farmacias y perfumerías"
-},
-{
-"id": "dni-libreria",
-"medio": "Cuenta DNI",
-"donde": [
-"*"
-],
-"dias": [
-1,
-2
-],
-"pct": 0.1,
-"tope": null,
-"periodo": null,
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "Textos escolares. Sin tope.",
-"rubro": "Librerías"
-},
-{
-"id": "dni-vete",
-"medio": "Cuenta DNI",
-"donde": [
-"*"
-],
-"dias": [
-6
-],
-"pct": 0.3,
-"tope": 8000,
-"periodo": "semana",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "",
-"rubro": "Mascotas"
-},
-{
-"id": "dni-garrafa",
-"medio": "Cuenta DNI",
-"donde": [
-"*"
-],
-"dias": [],
-"pct": 0.4,
-"tope": 18000,
-"periodo": "mes",
-"minimo": 0,
-"costo": 0,
-"vence": "2026-09-30",
-"nota": "",
-"rubro": "Garrafas"
-}
+  {
+    "id": "binance-card",
+    "medio": "Binance Card (USDT)",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.03,
+    "tope": 160000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0.0075,
+    "vence": "2026-12-31",
+    "nota": "3% en USDC, tope 100 USDC/mes (~$160.000). Costo = comprar USDT en P2P y que la tarjeta lo convierta.",
+    "rubro": "*"
+  },
+  {
+    "id": "letsbit",
+    "medio": "Let'sBit (pesos)",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.025,
+    "tope": 30000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "",
+    "nota": "2,5% pagando en pesos, tope $30.000/mes. Dato de 2024: verificá que siga vigente.",
+    "rubro": "*"
+  },
+  {
+    "id": "ripio-cripto",
+    "medio": "Ripio Card (cripto)",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.02,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0.015,
+    "grupo": "ripio",
+    "vence": "",
+    "nota": "2% en USDT/BTC/ETH (4% los primeros 30 días). Costo por spread de Ripio.",
+    "rubro": "*"
+  },
+  {
+    "id": "ripio-pesos",
+    "medio": "Ripio Card (pesos)",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.005,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "grupo": "ripio",
+    "vence": "",
+    "nota": "0,5% pagando en pesos (1% los primeros 30 días).",
+    "rubro": "*"
+  },
+  {
+    "id": "lemon-pesos",
+    "medio": "Lemon (pesos)",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.0025,
+    "tope": 30000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "grupo": "lemon",
+    "vence": "",
+    "nota": "0,25% en BTC desde el 1/9/2026. Tope $30.000/mes compartido.",
+    "rubro": "*"
+  },
+  {
+    "id": "lemon-cripto",
+    "medio": "Lemon (cripto)",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.02,
+    "tope": 30000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0.037,
+    "grupo": "lemon",
+    "vence": "",
+    "nota": "2% en BTC, pero 0,5% de fee + spread de Lemon: sale negativo.",
+    "rubro": "*"
+  },
+  {
+    "id": "bybit-card",
+    "medio": "Bybit Card",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.01,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0.023,
+    "vence": "",
+    "nota": "1% sin VIP (2-10% con VIP). Fee 0,9% por conversión + spread.",
+    "rubro": "*"
+  },
+  {
+    "id": "buenbit-stockback",
+    "medio": "Buenbit Stockback",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.01,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "",
+    "nota": "1% en acciones o cripto de la marca donde comprás. Verificá condiciones.",
+    "rubro": "*"
+  },
+  {
+    "id": "fiwind-colectivo",
+    "medio": "Fiwind",
+    "donde": [
+      "Colectivo"
+    ],
+    "dias": [],
+    "pct": 0.5,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "",
+    "nota": "50% en colectivos pagando con la tarjeta vía Apple Pay o Google Pay. Tope no publicado.",
+    "rubro": "Transporte"
+  },
+  {
+    "id": "mp-carrefour",
+    "medio": "Mercado Pago",
+    "donde": [
+      "Carrefour"
+    ],
+    "dias": [
+      1
+    ],
+    "pct": 0.15,
+    "tope": 15000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Lunes, pagando con QR.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "mp-changomas",
+    "medio": "Mercado Pago",
+    "donde": [
+      "ChangoMás"
+    ],
+    "dias": [
+      2
+    ],
+    "pct": 0.15,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Martes, pagando con QR. Sin tope.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "mp-dia",
+    "medio": "Mercado Pago",
+    "donde": [
+      "Día"
+    ],
+    "dias": [
+      3
+    ],
+    "pct": 0.15,
+    "tope": null,
+    "periodo": null,
+    "minimo": 20000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Miércoles, QR, compra mínima $20.000. Sin tope.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "nx-jumbo",
+    "medio": "Naranja X",
+    "donde": [
+      "Jumbo"
+    ],
+    "dias": [
+      5,
+      6,
+      0
+    ],
+    "pct": 0.3,
+    "tope": 12000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "grupo": "nx-epico",
+    "vence": "2026-09-30",
+    "nota": "Plan Épico. Tope semanal compartido con Día.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "nx-dia",
+    "medio": "Naranja X",
+    "donde": [
+      "Día"
+    ],
+    "dias": [
+      2
+    ],
+    "pct": 0.3,
+    "tope": 12000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "grupo": "nx-epico",
+    "vence": "2026-09-30",
+    "nota": "Plan Épico. Tope semanal compartido con Jumbo.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "nx-changomas",
+    "medio": "Naranja X",
+    "donde": [
+      "ChangoMás"
+    ],
+    "dias": [
+      5,
+      6,
+      0
+    ],
+    "pct": 0.15,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Sin tope.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "galicia-jumbo",
+    "medio": "Galicia",
+    "donde": [
+      "Jumbo"
+    ],
+    "dias": [
+      2,
+      4
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 100000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Compra mínima $100.000.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "galicia-dia",
+    "medio": "Galicia",
+    "donde": [
+      "Día"
+    ],
+    "dias": [
+      5,
+      6
+    ],
+    "pct": 0.2,
+    "tope": 20000,
+    "periodo": "mes",
+    "minimo": 35000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Compra mínima $35.000.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "macro-jumbo",
+    "medio": "Macro",
+    "donde": [
+      "Jumbo"
+    ],
+    "dias": [
+      2,
+      4
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "modo-jumbo",
+    "medio": "MODO",
+    "donde": [
+      "Jumbo"
+    ],
+    "dias": [
+      2,
+      4
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 100000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Compra mínima $100.000.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "santander-jumbo",
+    "medio": "Santander",
+    "donde": [
+      "Jumbo"
+    ],
+    "dias": [
+      2,
+      4
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 100000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Compra mínima $100.000.",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "bna-carrefour",
+    "medio": "Banco Nación",
+    "donde": [
+      "Carrefour"
+    ],
+    "dias": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "pct": 0.05,
+    "tope": 5000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "bna-changomas",
+    "medio": "Banco Nación",
+    "donde": [
+      "ChangoMás"
+    ],
+    "dias": [
+      3
+    ],
+    "pct": 0.35,
+    "tope": 15000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "",
+    "rubro": "Supermercados"
+  },
+  {
+    "id": "dni-cercania",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "*"
+    ],
+    "dias": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "pct": 0.2,
+    "tope": 6000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "",
+    "rubro": "Comercio de barrio"
+  },
+  {
+    "id": "dni-ferias",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.4,
+    "tope": 6000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Ferias y mercados bonaerenses.",
+    "rubro": "Ferias y mercados"
+  },
+  {
+    "id": "dni-gastro",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "*"
+    ],
+    "dias": [
+      6,
+      0
+    ],
+    "pct": 0.25,
+    "tope": 8000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "",
+    "rubro": "Gastronomía"
+  },
+  {
+    "id": "dni-ypf",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "YPF Full"
+    ],
+    "dias": [
+      6,
+      0
+    ],
+    "pct": 0.25,
+    "tope": 8000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Solo comida en YPF Full.",
+    "rubro": "Combustible"
+  },
+  {
+    "id": "dni-farmacia",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "*"
+    ],
+    "dias": [
+      3,
+      4
+    ],
+    "pct": 0.1,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Sin tope.",
+    "rubro": "Farmacias y perfumerías"
+  },
+  {
+    "id": "dni-libreria",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "*"
+    ],
+    "dias": [
+      1,
+      2
+    ],
+    "pct": 0.1,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Textos escolares. Sin tope.",
+    "rubro": "Librerías"
+  },
+  {
+    "id": "dni-vete",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "*"
+    ],
+    "dias": [
+      6
+    ],
+    "pct": 0.3,
+    "tope": 8000,
+    "periodo": "semana",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "",
+    "rubro": "Mascotas"
+  },
+  {
+    "id": "dni-garrafa",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "*"
+    ],
+    "dias": [],
+    "pct": 0.4,
+    "tope": 18000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "",
+    "rubro": "Garrafas"
+  },
+  {
+    "id": "galicia-combustible",
+    "medio": "Galicia",
+    "rubro": "Combustible",
+    "donde": [
+      "YPF",
+      "Shell",
+      "Axion",
+      "Puma"
+    ],
+    "dias": [],
+    "fechas": [
+      "2026-09-10"
+    ],
+    "pct": 0.1,
+    "tope": 10000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Solo un día al mes. Mastercard contactless (Apple/Google Pay) o QR MODO. Éminent: 15%, tope $15.000."
+  }
 ]

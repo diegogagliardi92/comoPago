@@ -5,7 +5,7 @@ Web app estática (PWA) que te dice con qué tarjeta o billetera conviene pagar 
 ## Cómo funciona
 
 - `index.html`: la app completa (HTML + CSS + JS, sin build).
-- `promos.json`: catálogo de promos. Es la fuente que se actualiza cada mes.
+- `promos.json`: catálogo de promos. Es la fuente de datos; una rutina de Claude la revisa cada 3 días y abre un PR con los cambios.
 - `local-db.js`: guarda en el navegador tus compras registradas, los medios que tenés y los cambios que hagas a las promos desde la app.
 - `sw.js` + `manifest.webmanifest`: permiten instalarla en el celular y usarla sin conexión.
 
@@ -20,6 +20,7 @@ Los datos que cargás desde la app quedan **en ese dispositivo** (localStorage).
   "rubro": "Supermercados",       // "*" = cualquier rubro (tarjetas generales)
   "donde": ["Jumbo"],             // ["*"] = todas las tiendas del rubro
   "dias": [5, 6, 0],              // 0=Dom ... 6=Sáb; [] = todos los días
+  "fechas": ["2026-09-10"],       // opcional: solo esas fechas puntuales
   "pct": 0.3,                     // 30%
   "tope": 12000,                  // tope de reintegro en $, null = sin tope
   "periodo": "semana",            // "dia" | "semana" | "mes" | null
