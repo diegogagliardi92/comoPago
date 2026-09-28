@@ -133,6 +133,7 @@ input,select{min-height:44px}
 .checks label{flex-direction:row;align-items:center;gap:8px;font-size:14px;color:var(--ink);padding:8px 10px;background:var(--sunk);border-radius:9px;border:1px solid var(--line)}
 .checks input{width:auto}
 .status{font-size:12px;color:var(--muted)}
+.mb{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 5px;border-radius:8px;color:#fff;font:800 10px/1 var(--sans);letter-spacing:.02em;margin-right:8px;vertical-align:-6px}
 a.src{color:var(--accent);font-weight:600;white-space:nowrap}
 .ticket a.src{color:var(--lime)}
 .banner{font-size:13px;padding:10px 12px;border-radius:10px;background:var(--sunk);color:var(--muted)}
@@ -245,6 +246,16 @@ const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+
 const fromIso = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d); };
 const esc = s => String(s??"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const rubroOf = p => p.rubro || GEN;
+const ICON = {"*":"💳",Supermercados:"🛒","Gastronomía":"🍽️","Farmacias y perfumerías":"💊",Combustible:"⛽","Comercio de barrio":"🏪","Ferias y mercados":"🧺",Transporte:"🚌",Mascotas:"🐾","Librerías":"📚",Garrafas:"🔥"};
+const ico = r => ICON[r] || "🏷️";
+// Distintivo de color por medio para reconocerlo de un vistazo; los que no están en la lista toman un color derivado del nombre.
+const MARCA = [["Galicia","G","#E8641B"],["Santander","S","#EC0000"],["Macro","M","#1B3F8B"],["BBVA","BB","#004481"],["Banco Nación","BN","#0A6CB0"],["Mercado Pago","MP","#00A6E4"],["MODO","MO","#00A37A"],["Naranja X","NX","#FE5000"],["Cuenta DNI","DNI","#00843D"],["Ualá","U","#3E6BFF"],["Personal Pay","PP","#0097C4"],["Binance","B","#C99A06"],["Let'sBit","LB","#6C3BF5"],["Ripio","R","#5E2BFF"],["Lemon","L","#00A854"],["Bybit","BY","#D98F00"],["Buenbit","BB","#4A3AFF"],["Fiwind","F","#00A896"]];
+function badge(medio){
+  const m = MARCA.find(([k])=>medio.startsWith(k));
+  const txt = m ? m[1] : medio.replace(/\(.*\)/,"").trim().split(/\s+/).map(w=>w[0]).join("").slice(0,2).toUpperCase();
+  const col = m ? m[2] : `hsl(${[...medio].reduce((a,c)=>a+c.charCodeAt(0),0)%360} 55% 42%)`;
+  return `<span class="mb" style="background:${col}" aria-hidden="true">${esc(txt)}</span>`;
+}
 const nombre = p => p.medio + (p.segmento?.length ? " " + p.segmento.join(" + ") : "");
 const fuente = p => /^https:\/\//.test(p.fuente||"") ? ` <a class="src" href="${esc(p.fuente)}" target="_blank" rel="noopener">Ver fuente ↗</a>` : "";
 const store = { get(k,d){ try{ const v = localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(_){ return d; } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){} } };
@@ -329,18 +340,18 @@ function renderPicker(){
   if(sel.rubro!==GEN && !cat.has(sel.rubro)) sel = {rubro:rubrosOrdenados(cat)[0]||GEN, tienda:GEN};
   const tiendas = sel.rubro===GEN ? [] : [...(cat.get(sel.rubro)||[])].sort((a,b)=>a.localeCompare(b,"es"));
   if(sel.tienda!==GEN && !tiendas.includes(sel.tienda)) sel.tienda = tiendas[0] || GEN;
-  const rname = sel.rubro===GEN ? "Otro rubro" : sel.rubro;
+  const rname = sel.rubro===GEN ? "General" : sel.rubro;
   const tname = sel.tienda===GEN ? (tiendas.length ? "Otra tienda" : "Cualquier comercio") : sel.tienda;
   let h = "";
   if(pickerOpen){
     h += `<div class="crumb"><h2>Elegí el rubro</h2><button class="ghost" data-close="1">Listo</button></div><div class="rubros">`;
     rubrosOrdenados(cat).forEach(r=>{
       const n = promosHoy(r, fecha);
-      h += `<button class="rubro${r===sel.rubro?" on":""}" data-rubro="${esc(r)}"><b>${esc(r)}</b><span class="${n?"hot":""}">${n? n+(n>1?" promos hoy":" promo hoy") : "sin promos hoy"}</span></button>`;
+      h += `<button class="rubro${r===sel.rubro?" on":""}" data-rubro="${esc(r)}"><b>${ico(r)} ${esc(r)}</b><span class="${n?"hot":""}">${n? n+(n>1?" promos hoy":" promo hoy") : "sin promos hoy"}</span></button>`;
     });
-    h += `<button class="rubro${sel.rubro===GEN?" on":""}" data-rubro="${GEN}"><b>Otro rubro</b><span>solo tarjetas generales</span></button></div>`;
+    h += `<button class="rubro${sel.rubro===GEN?" on":""}" data-rubro="${GEN}"><b>${ico(GEN)} General</b><span>cualquier otra compra</span></button></div>`;
   } else {
-    h += `<div class="crumb"><div class="path">${esc(rname)} <small>›</small> ${esc(tname)}</div><button data-open="1">Cambiar rubro</button></div>`;
+    h += `<div class="crumb"><div class="path">${ico(sel.rubro)} ${esc(rname)} <small>›</small> ${esc(tname)}</div><button data-open="1">Cambiar rubro</button></div>`;
   }
   if(sel.rubro!==GEN){
     h += `<div class="tiendas">` + tiendas.map(t=>`<button class="tienda${t===sel.tienda?" on":""}" data-tienda="${esc(t)}">${esc(t)}</button>`).join("")
@@ -368,14 +379,14 @@ function calc(){
   if(!(monto>0)){ t.innerHTML = `<div class="empty">Poné un monto para calcular.</div>`; $("#rank").innerHTML=""; lastPlan=null; return; }
   const cands = candidatos(rubro, tienda, fecha, monto);
   const pl = plan(cands, monto);
-  const donde = tienda!==GEN ? tienda : (rubro!==GEN ? rubro : "Otro comercio");
+  const donde = tienda!==GEN ? tienda : (rubro!==GEN ? rubro : "General");
   lastPlan = {donde, rubro, fecha, monto, pl};
   const total = pl.lines.reduce((a,l)=>a+l.reint-l.costo,0);
   const dname = DIAS[fromIso(fecha).getDay()];
   let html = `<div class="ticket-head"><div><div class="lbl">${esc(donde)} · ${dname} ${fecha.slice(8)}/${fecha.slice(5,7)} · ${fmt(monto)}</div><div style="font-weight:700;margin-top:4px;font-size:16px">${pl.lines.length? (pl.lines.length>1?"Dividí el pago así":"Pagá con "+esc(nombre(pl.lines[0].c.p))) : "Ninguna promo aplica hoy"}</div></div><div style="text-align:right"><div class="lbl">Ahorro neto</div><div class="big num">${fmt(total)}</div></div></div><div class="tear"></div>`;
   pl.lines.forEach((l,i)=>{
     const p = l.c.p;
-    html += `<div class="line"><div class="step">${i+1}</div><div><div class="who">${esc(nombre(p))} <span class="pill good">${pctf(p.pct)}</span></div><div class="why">${esc(why(l.c))}${l.lleno?" · <b>llenás el tope</b>":""}</div>${p.nota||p.fuente?`<div class="why">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="amt num"><div class="pay">${fmt(l.pago)}</div><div class="back">+${fmt(l.reint - l.costo)}</div></div></div>`;
+    html += `<div class="line"><div class="step">${i+1}</div><div><div class="who">${badge(p.medio)}${esc(nombre(p))} <span class="pill good">${pctf(p.pct)}</span></div><div class="why">${esc(why(l.c))}${l.lleno?" · <b>llenás el tope</b>":""}</div>${p.nota||p.fuente?`<div class="why">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="amt num"><div class="pay">${fmt(l.pago)}</div><div class="back">+${fmt(l.reint - l.costo)}</div></div></div>`;
   });
   if(pl.resto > 0.5){
     html += `<div class="line plain"><div class="step">${pl.lines.length+1}</div><div><div class="who">El resto, como quieras</div><div class="why">No queda ninguna promo con tope disponible para este monto.</div></div><div class="amt num"><div class="pay">${fmt(pl.resto)}</div><div class="back">+$0</div></div></div>`;
@@ -388,7 +399,7 @@ function calc(){
     const p=c.p, pillc = c.neto>0.001?"good":(c.neto<-0.001?"bad":"warn");
     const usedFrac = p.tope==null?0:Math.min(1,(p.tope-c.restante)/p.tope);
     const bajoMin = monto < (p.minimo||0);
-    return `<div class="opt"><div><b>${esc(nombre(p))}</b> <span class="hint">${esc(rubroOf(p)===GEN?"general":"")}</span><div class="hint">${esc(why(c))}</div>${p.tope!=null?`<div class="meter" title="Tope usado"><i style="width:${usedFrac*100}%"></i></div>`:""}</div><div class="r"><span class="pill ${pillc} num">neto ${pctf(c.neto)}</span></div><div class="kv"><span>Reintegro <b class="num">${pctf(p.pct)}</b></span><span>Rinde hasta <b class="num">${c.hasta===Infinity?"sin tope":(c.restante<=0?"tope lleno":fmt(c.hasta))}</b></span><span>Si pagás todo <b class="num">${bajoMin?"no llega al mín.":fmt(c.pagoTodo)}</b></span></div></div>`;
+    return `<div class="opt"><div>${badge(p.medio)}<b>${esc(nombre(p))}</b> <span class="hint">${esc(rubroOf(p)===GEN?"general":"")}</span><div class="hint">${esc(why(c))}</div>${p.tope!=null?`<div class="meter" title="Tope usado"><i style="width:${usedFrac*100}%"></i></div>`:""}</div><div class="r"><span class="pill ${pillc} num">neto ${pctf(c.neto)}</span></div><div class="kv"><span>Reintegro <b class="num">${pctf(p.pct)}</b></span><span>Rinde hasta <b class="num">${c.hasta===Infinity?"sin tope":(c.restante<=0?"tope lleno":fmt(c.hasta))}</b></span><span>Si pagás todo <b class="num">${bajoMin?"no llega al mín.":fmt(c.pagoTodo)}</b></span></div></div>`;
   }).join("") : `<p class="hint">Ninguna promo cargada aplica a este comercio y día.</p>`;
 }
 
@@ -408,11 +419,11 @@ function promoRow(p, hoy){
   const venc = p.vence && p.vence < hoy;
   const d = p.donde||[GEN];
   const donde = d.includes(GEN) ? (rubroOf(p)===GEN?"Cualquier comercio":"Todas las tiendas") : d.join(", ");
-  return `<div class="row"><div><div><b>${esc(nombre(p))}</b> · ${esc(donde)} <span class="pill ${venc?"bad":"good"}">${pctf(p.pct)}</span></div><div class="meta">${p.fechas&&p.fechas.length?p.fechas.map(f=>f.slice(8)+"/"+f.slice(5,7)).join(", "):p.dias&&p.dias.length?p.dias.map(x=>DIAS[x]).join(" "):"Todos los días"} · ${p.tope!=null?`tope ${fmt(p.tope)}/${PER[p.periodo]}`:"sin tope"}${p.minimo?` · mín. ${fmt(p.minimo)}`:""}${p.costo?` · costo ${pctf(p.costo)}`:""}${p.vence?` · ${venc?"venció":"vence"} ${p.vence.slice(8)}/${p.vence.slice(5,7)}`:""}</div>${p.nota||p.fuente?`<div class="meta">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="acts">${db?`<button class="ghost" data-edit="${esc(p.id)}">Editar</button><button class="ghost danger" data-del="${esc(p.id)}">Borrar</button>`:""}</div></div>`;
+  return `<div class="row"><div><div>${badge(p.medio)}<b>${esc(nombre(p))}</b> · ${esc(donde)} <span class="pill ${venc?"bad":"good"}">${pctf(p.pct)}</span></div><div class="meta">${p.fechas&&p.fechas.length?p.fechas.map(f=>f.slice(8)+"/"+f.slice(5,7)).join(", "):p.dias&&p.dias.length?p.dias.map(x=>DIAS[x]).join(" "):"Todos los días"} · ${p.tope!=null?`tope ${fmt(p.tope)}/${PER[p.periodo]}`:"sin tope"}${p.minimo?` · mín. ${fmt(p.minimo)}`:""}${p.costo?` · costo ${pctf(p.costo)}`:""}${p.vence?` · ${venc?"venció":"vence"} ${p.vence.slice(8)}/${p.vence.slice(5,7)}`:""}</div>${p.nota||p.fuente?`<div class="meta">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="acts">${db?`<button class="ghost" data-edit="${esc(p.id)}">Editar</button><button class="ghost danger" data-del="${esc(p.id)}">Borrar</button>`:""}</div></div>`;
 }
 function renderPromos(){
   const hoy = iso(new Date()), cat = catalogo();
-  const grupos = [[GEN, "Tarjetas y billeteras (cualquier comercio)"], ...rubrosOrdenados(cat).map(r=>[r,r])];
+  const grupos = [[GEN, `${ico(GEN)} General (cualquier comercio)`], ...rubrosOrdenados(cat).map(r=>[r,`${ico(r)} ${r}`])];
   const openSet = new Set([...document.querySelectorAll("details.grp[open]")].map(d=>d.dataset.r));
   $("#plist").innerHTML = grupos.map(([r,label])=>{
     const ps = promos.filter(p=>rubroOf(p)===r).sort((a,b)=>(a.donde||[]).join().localeCompare((b.donde||[]).join(),"es")||a.medio.localeCompare(b.medio,"es"));
@@ -424,13 +435,13 @@ function renderPromos(){
 function renderMedios(){
   const ms = [...new Set(promos.map(p=>p.medio))].sort((a,b)=>a.localeCompare(b,"es"));
   const ss = [...new Set(promos.flatMap(p=>(p.segmento||[]).map(s=>p.medio+"|"+s)))].sort((a,b)=>a.localeCompare(b,"es"));
-  $("#mlist").innerHTML = ms.map((m,i)=>`<label for="m${i}"><input type="checkbox" id="m${i}" data-m="${esc(m)}" ${noTengo.has(m)?"":"checked"}> ${esc(m)}</label>`).join("")
+  $("#mlist").innerHTML = ms.map((m,i)=>`<label for="m${i}"><input type="checkbox" id="m${i}" data-m="${esc(m)}" ${noTengo.has(m)?"":"checked"}> ${badge(m)}${esc(m)}</label>`).join("")
     + (ss.length ? `<h2 style="grid-column:1/-1;margin-top:10px">Mis planes del banco</h2><p class="hint" style="grid-column:1/-1;margin:0">Marcá los que tenés (Éminent, cobro de sueldo…) y te muestro también esas promos. No se suman: te recomiendo la mejor.</p>`
-      + ss.map((k,i)=>`<label for="s${i}"><input type="checkbox" id="s${i}" data-seg="${esc(k)}" ${segs.has(k)?"checked":""}> ${esc(k.replace("|"," "))}</label>`).join("") : "");
+      + ss.map((k,i)=>`<label for="s${i}"><input type="checkbox" id="s${i}" data-seg="${esc(k)}" ${segs.has(k)?"checked":""}> ${badge(k.split("|")[0])}${esc(k.replace("|"," "))}</label>`).join("") : "");
 }
 function renderHist(){
   const list = usos.slice().sort((a,b)=>(b.ts||0)-(a.ts||0));
-  $("#hlist").innerHTML = list.map(u=>`<div class="row"><div><div><b>${esc(u.medio)}</b> · ${esc(u.donde==="*"?"Otro comercio":u.donde)}</div><div class="meta num">${u.fecha.slice(8)}/${u.fecha.slice(5,7)} · pagaste ${fmt(u.pago)} · reintegro ${fmt(u.reintegro)}</div></div><div class="acts"><button class="ghost danger" data-udel="${esc(u._id||"")}">Borrar</button></div></div>`).join("") || `<p class="hint">Todavía no registraste compras.</p>`;
+  $("#hlist").innerHTML = list.map(u=>`<div class="row"><div><div><b>${esc(u.medio)}</b> · ${esc(u.donde==="*"?"General":u.donde)}</div><div class="meta num">${u.fecha.slice(8)}/${u.fecha.slice(5,7)} · pagaste ${fmt(u.pago)} · reintegro ${fmt(u.reintegro)}</div></div><div class="acts"><button class="ghost danger" data-udel="${esc(u._id||"")}">Borrar</button></div></div>`).join("") || `<p class="hint">Todavía no registraste compras.</p>`;
 }
 function renderAll(){ renderPicker(); renderPromos(); renderMedios(); renderHist(); calc(); }
 
