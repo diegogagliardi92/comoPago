@@ -714,7 +714,8 @@
     "costo": 0,
     "vence": "2026-09-30",
     "nota": "Débito, Visa o Mastercard. Con Amex: 30%, tope $5.000.",
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/171844"
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/171844",
+    "grupo": "galicia-uber"
   },
   {
     "id": "galicia-cabify",
@@ -733,7 +734,8 @@
     "costo": 0,
     "vence": "2026-09-30",
     "nota": "Débito, Visa o Mastercard. Con Amex: 30%, tope $5.000.",
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/171267"
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/171267",
+    "grupo": "galicia-cabify"
   },
   {
     "id": "galicia-puppis",
@@ -751,8 +753,9 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO). Éminent 25%.",
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/170412"
+    "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO).",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/170412",
+    "grupo": "galicia-puppis"
   },
   {
     "id": "galicia-combustible",
@@ -771,12 +774,13 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-10-10",
-    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo. Éminent 15% ($15.000), haberes 20% ($15.000), Éminent+haberes 25% ($20.000).",
+    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo.",
     "fechas": [
       "2026-09-28",
       "2026-10-10"
     ],
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181917"
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181917",
+    "grupo": "galicia-combustible"
   },
   {
     "id": "galicia-colectivo-oct",
@@ -795,5 +799,159 @@
     "nota": "100% en octubre. Mastercard por NFC (Apple/Google Pay, app Galicia o MODO).",
     "desde": "2026-10-01",
     "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181251"
+  },
+  {
+    "id": "galicia-combustible-eminent",
+    "medio": "Galicia",
+    "rubro": "Combustible",
+    "donde": [
+      "YPF",
+      "Shell",
+      "Axion",
+      "Puma"
+    ],
+    "dias": [],
+    "pct": 0.15,
+    "tope": 15000,
+    "periodo": "dia",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-10",
+    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo.",
+    "fechas": [
+      "2026-09-28",
+      "2026-10-10"
+    ],
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181918",
+    "grupo": "galicia-combustible",
+    "segmento": [
+      "Éminent"
+    ]
+  },
+  {
+    "id": "galicia-combustible-haberes",
+    "medio": "Galicia",
+    "rubro": "Combustible",
+    "donde": [
+      "YPF",
+      "Shell",
+      "Axion",
+      "Puma"
+    ],
+    "dias": [],
+    "pct": 0.2,
+    "tope": 15000,
+    "periodo": "dia",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-10",
+    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo.",
+    "fechas": [
+      "2026-09-28",
+      "2026-10-10"
+    ],
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181919",
+    "grupo": "galicia-combustible",
+    "segmento": [
+      "Haberes"
+    ]
+  },
+  {
+    "id": "galicia-combustible-eminent-haberes",
+    "medio": "Galicia",
+    "rubro": "Combustible",
+    "donde": [
+      "YPF",
+      "Shell",
+      "Axion",
+      "Puma"
+    ],
+    "dias": [],
+    "pct": 0.25,
+    "tope": 20000,
+    "periodo": "dia",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-10",
+    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo.",
+    "fechas": [
+      "2026-09-28",
+      "2026-10-10"
+    ],
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181920",
+    "grupo": "galicia-combustible",
+    "segmento": [
+      "Éminent",
+      "Haberes"
+    ]
+  },
+  {
+    "id": "galicia-puppis-eminent",
+    "medio": "Galicia",
+    "rubro": "Mascotas",
+    "donde": [
+      "Puppis"
+    ],
+    "dias": [
+      4
+    ],
+    "pct": 0.25,
+    "tope": 15000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO).",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/170413",
+    "grupo": "galicia-puppis",
+    "segmento": [
+      "Éminent"
+    ]
+  },
+  {
+    "id": "galicia-uber-eminent",
+    "medio": "Galicia",
+    "rubro": "Transporte",
+    "donde": [
+      "Uber"
+    ],
+    "dias": [
+      3
+    ],
+    "pct": 0.25,
+    "tope": 4000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Débito, Visa o Mastercard. Con Amex Éminent: 35%, tope $6.000.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/171845",
+    "grupo": "galicia-uber",
+    "segmento": [
+      "Éminent"
+    ]
+  },
+  {
+    "id": "galicia-cabify-eminent",
+    "medio": "Galicia",
+    "rubro": "Transporte",
+    "donde": [
+      "Cabify"
+    ],
+    "dias": [
+      0
+    ],
+    "pct": 0.25,
+    "tope": 4000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Débito, Visa o Mastercard. Con Amex Éminent: 35%, tope $6.000.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/171268",
+    "grupo": "galicia-cabify",
+    "segmento": [
+      "Éminent"
+    ]
   }
 ]

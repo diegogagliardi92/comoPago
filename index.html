@@ -245,6 +245,7 @@ const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+
 const fromIso = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d); };
 const esc = s => String(s??"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const rubroOf = p => p.rubro || GEN;
+const nombre = p => p.medio + (p.segmento?.length ? " " + p.segmento.join(" + ") : "");
 const fuente = p => /^https:\/\//.test(p.fuente||"") ? ` <a class="src" href="${esc(p.fuente)}" target="_blank" rel="noopener">Ver fuente ↗</a>` : "";
 const store = { get(k,d){ try{ const v = localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(_){ return d; } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){} } };
 
@@ -252,6 +253,7 @@ let db = null;
 let promos = FALLBACK.slice();
 let usos = [];
 let noTengo = new Set(store.get("noTengo", []));
+let segs = new Set(store.get("segs", [])); // "Galicia|Éminent": planes del banco que tenés
 let editingId = null;
 let sel = store.get("sel", {rubro:"Supermercados", tienda:"Jumbo"});
 let pickerOpen = false;
@@ -273,6 +275,7 @@ function vigenteHoy(p, fecha){
   if(p.desde && fecha < p.desde) return false;
   if(p.fechas && p.fechas.length && !p.fechas.includes(fecha)) return false;
   if(p.dias && p.dias.length && !p.dias.includes(fromIso(fecha).getDay())) return false;
+  if(p.segmento?.length && !p.segmento.every(s=>segs.has(p.medio+"|"+s))) return false;
   return !noTengo.has(p.medio);
 }
 function aplica(p, rubro, tienda, fecha){
@@ -369,23 +372,23 @@ function calc(){
   lastPlan = {donde, rubro, fecha, monto, pl};
   const total = pl.lines.reduce((a,l)=>a+l.reint-l.costo,0);
   const dname = DIAS[fromIso(fecha).getDay()];
-  let html = `<div class="ticket-head"><div><div class="lbl">${esc(donde)} · ${dname} ${fecha.slice(8)}/${fecha.slice(5,7)} · ${fmt(monto)}</div><div style="font-weight:700;margin-top:4px;font-size:16px">${pl.lines.length? (pl.lines.length>1?"Dividí el pago así":"Pagá con "+esc(pl.lines[0].c.p.medio)) : "Ninguna promo aplica hoy"}</div></div><div style="text-align:right"><div class="lbl">Ahorro neto</div><div class="big num">${fmt(total)}</div></div></div><div class="tear"></div>`;
+  let html = `<div class="ticket-head"><div><div class="lbl">${esc(donde)} · ${dname} ${fecha.slice(8)}/${fecha.slice(5,7)} · ${fmt(monto)}</div><div style="font-weight:700;margin-top:4px;font-size:16px">${pl.lines.length? (pl.lines.length>1?"Dividí el pago así":"Pagá con "+esc(nombre(pl.lines[0].c.p))) : "Ninguna promo aplica hoy"}</div></div><div style="text-align:right"><div class="lbl">Ahorro neto</div><div class="big num">${fmt(total)}</div></div></div><div class="tear"></div>`;
   pl.lines.forEach((l,i)=>{
     const p = l.c.p;
-    html += `<div class="line"><div class="step">${i+1}</div><div><div class="who">${esc(p.medio)} <span class="pill good">${pctf(p.pct)}</span></div><div class="why">${esc(why(l.c))}${l.lleno?" · <b>llenás el tope</b>":""}</div>${p.nota||p.fuente?`<div class="why">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="amt num"><div class="pay">${fmt(l.pago)}</div><div class="back">+${fmt(l.reint - l.costo)}</div></div></div>`;
+    html += `<div class="line"><div class="step">${i+1}</div><div><div class="who">${esc(nombre(p))} <span class="pill good">${pctf(p.pct)}</span></div><div class="why">${esc(why(l.c))}${l.lleno?" · <b>llenás el tope</b>":""}</div>${p.nota||p.fuente?`<div class="why">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="amt num"><div class="pay">${fmt(l.pago)}</div><div class="back">+${fmt(l.reint - l.costo)}</div></div></div>`;
   });
   if(pl.resto > 0.5){
     html += `<div class="line plain"><div class="step">${pl.lines.length+1}</div><div><div class="who">El resto, como quieras</div><div class="why">No queda ninguna promo con tope disponible para este monto.</div></div><div class="amt num"><div class="pay">${fmt(pl.resto)}</div><div class="back">+$0</div></div></div>`;
   }
   const first = pl.lines[0];
-  html += `<div class="ticket-foot"><span class="hint">${first && first.c.hasta!==Infinity ? `Con ${esc(first.c.p.medio)} rinde hasta <b class="num">${fmt(first.c.hasta)}</b> de compra.` : (pl.lines.length>1?"Pedí pagar en dos tickets o dos cobros.":"")}</span>${pl.lines.length?`<button class="primary" id="btn-reg">Registrar compra</button>`:""}</div>`;
+  html += `<div class="ticket-foot"><span class="hint">${first && first.c.hasta!==Infinity ? `Con ${esc(nombre(first.c.p))} rinde hasta <b class="num">${fmt(first.c.hasta)}</b> de compra.` : (pl.lines.length>1?"Pedí pagar en dos tickets o dos cobros.":"")}</span>${pl.lines.length?`<button class="primary" id="btn-reg">Registrar compra</button>`:""}</div>`;
   t.innerHTML = html;
 
   $("#rank").innerHTML = cands.length ? cands.map(c=>{
     const p=c.p, pillc = c.neto>0.001?"good":(c.neto<-0.001?"bad":"warn");
     const usedFrac = p.tope==null?0:Math.min(1,(p.tope-c.restante)/p.tope);
     const bajoMin = monto < (p.minimo||0);
-    return `<div class="opt"><div><b>${esc(p.medio)}</b> <span class="hint">${esc(rubroOf(p)===GEN?"general":"")}</span><div class="hint">${esc(why(c))}</div>${p.tope!=null?`<div class="meter" title="Tope usado"><i style="width:${usedFrac*100}%"></i></div>`:""}</div><div class="r"><span class="pill ${pillc} num">neto ${pctf(c.neto)}</span></div><div class="kv"><span>Reintegro <b class="num">${pctf(p.pct)}</b></span><span>Rinde hasta <b class="num">${c.hasta===Infinity?"sin tope":(c.restante<=0?"tope lleno":fmt(c.hasta))}</b></span><span>Si pagás todo <b class="num">${bajoMin?"no llega al mín.":fmt(c.pagoTodo)}</b></span></div></div>`;
+    return `<div class="opt"><div><b>${esc(nombre(p))}</b> <span class="hint">${esc(rubroOf(p)===GEN?"general":"")}</span><div class="hint">${esc(why(c))}</div>${p.tope!=null?`<div class="meter" title="Tope usado"><i style="width:${usedFrac*100}%"></i></div>`:""}</div><div class="r"><span class="pill ${pillc} num">neto ${pctf(c.neto)}</span></div><div class="kv"><span>Reintegro <b class="num">${pctf(p.pct)}</b></span><span>Rinde hasta <b class="num">${c.hasta===Infinity?"sin tope":(c.restante<=0?"tope lleno":fmt(c.hasta))}</b></span><span>Si pagás todo <b class="num">${bajoMin?"no llega al mín.":fmt(c.pagoTodo)}</b></span></div></div>`;
   }).join("") : `<p class="hint">Ninguna promo cargada aplica a este comercio y día.</p>`;
 }
 
@@ -405,7 +408,7 @@ function promoRow(p, hoy){
   const venc = p.vence && p.vence < hoy;
   const d = p.donde||[GEN];
   const donde = d.includes(GEN) ? (rubroOf(p)===GEN?"Cualquier comercio":"Todas las tiendas") : d.join(", ");
-  return `<div class="row"><div><div><b>${esc(p.medio)}</b> · ${esc(donde)} <span class="pill ${venc?"bad":"good"}">${pctf(p.pct)}</span></div><div class="meta">${p.fechas&&p.fechas.length?p.fechas.map(f=>f.slice(8)+"/"+f.slice(5,7)).join(", "):p.dias&&p.dias.length?p.dias.map(x=>DIAS[x]).join(" "):"Todos los días"} · ${p.tope!=null?`tope ${fmt(p.tope)}/${PER[p.periodo]}`:"sin tope"}${p.minimo?` · mín. ${fmt(p.minimo)}`:""}${p.costo?` · costo ${pctf(p.costo)}`:""}${p.vence?` · ${venc?"venció":"vence"} ${p.vence.slice(8)}/${p.vence.slice(5,7)}`:""}</div>${p.nota||p.fuente?`<div class="meta">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="acts">${db?`<button class="ghost" data-edit="${esc(p.id)}">Editar</button><button class="ghost danger" data-del="${esc(p.id)}">Borrar</button>`:""}</div></div>`;
+  return `<div class="row"><div><div><b>${esc(nombre(p))}</b> · ${esc(donde)} <span class="pill ${venc?"bad":"good"}">${pctf(p.pct)}</span></div><div class="meta">${p.fechas&&p.fechas.length?p.fechas.map(f=>f.slice(8)+"/"+f.slice(5,7)).join(", "):p.dias&&p.dias.length?p.dias.map(x=>DIAS[x]).join(" "):"Todos los días"} · ${p.tope!=null?`tope ${fmt(p.tope)}/${PER[p.periodo]}`:"sin tope"}${p.minimo?` · mín. ${fmt(p.minimo)}`:""}${p.costo?` · costo ${pctf(p.costo)}`:""}${p.vence?` · ${venc?"venció":"vence"} ${p.vence.slice(8)}/${p.vence.slice(5,7)}`:""}</div>${p.nota||p.fuente?`<div class="meta">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="acts">${db?`<button class="ghost" data-edit="${esc(p.id)}">Editar</button><button class="ghost danger" data-del="${esc(p.id)}">Borrar</button>`:""}</div></div>`;
 }
 function renderPromos(){
   const hoy = iso(new Date()), cat = catalogo();
@@ -420,7 +423,10 @@ function renderPromos(){
 }
 function renderMedios(){
   const ms = [...new Set(promos.map(p=>p.medio))].sort((a,b)=>a.localeCompare(b,"es"));
-  $("#mlist").innerHTML = ms.map((m,i)=>`<label for="m${i}"><input type="checkbox" id="m${i}" data-m="${esc(m)}" ${noTengo.has(m)?"":"checked"}> ${esc(m)}</label>`).join("");
+  const ss = [...new Set(promos.flatMap(p=>(p.segmento||[]).map(s=>p.medio+"|"+s)))].sort((a,b)=>a.localeCompare(b,"es"));
+  $("#mlist").innerHTML = ms.map((m,i)=>`<label for="m${i}"><input type="checkbox" id="m${i}" data-m="${esc(m)}" ${noTengo.has(m)?"":"checked"}> ${esc(m)}</label>`).join("")
+    + (ss.length ? `<h2 style="grid-column:1/-1;margin-top:10px">Mis planes del banco</h2><p class="hint" style="grid-column:1/-1;margin:0">Marcá los que tenés (Éminent, cobro de sueldo…) y te muestro también esas promos. No se suman: te recomiendo la mejor.</p>`
+      + ss.map((k,i)=>`<label for="s${i}"><input type="checkbox" id="s${i}" data-seg="${esc(k)}" ${segs.has(k)?"checked":""}> ${esc(k.replace("|"," "))}</label>`).join("") : "");
 }
 function renderHist(){
   const list = usos.slice().sort((a,b)=>(b.ts||0)-(a.ts||0));
@@ -459,7 +465,7 @@ $("#pform").addEventListener("submit", async e=>{
     pct, tope:isNaN(tope)?null:tope, periodo:isNaN(tope)?null:periodo, minimo:parseNum($("#p-min").value)||0, costo:(parseNum($("#p-costo").value)||0)/100,
     vence:$("#p-vence").value||"", nota:$("#p-nota").value.trim()};
   const g = $("#p-grupo").value.trim(); if(g) body.grupo = g;
-  const prev = promos.find(p=>p.id===editingId); if(prev?.fuente) body.fuente = prev.fuente;
+  const prev = promos.find(p=>p.id===editingId); if(prev?.fuente) body.fuente = prev.fuente; if(prev?.segmento) body.segmento = prev.segmento;
   const id = editingId || (medio+"-"+(donde[0]||rubro)).toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)+"-"+Date.now().toString(36);
   body.id = id;
   if(!db){ const i = promos.findIndex(p=>p.id===id); if(i>=0) promos[i]=body; else promos.push(body); $("#pform").hidden = true; renderAll(); return; }
@@ -494,11 +500,12 @@ document.addEventListener("click", e=>{
   });
 });
 $("#mlist").addEventListener("change", async e=>{
-  const m = e.target.dataset.m; if(!m) return;
-  e.target.checked ? noTengo.delete(m) : noTengo.add(m);
-  store.set("noTengo", [...noTengo]);
+  const m = e.target.dataset.m, sg = e.target.dataset.seg; if(!m && !sg) return;
+  if(m) e.target.checked ? noTengo.delete(m) : noTengo.add(m);
+  if(sg) e.target.checked ? segs.add(sg) : segs.delete(sg);
+  store.set("noTengo", [...noTengo]); store.set("segs", [...segs]);
   renderPicker(); calc();
-  if(db){ try{ await db.doc("config/medios").set({noTengo:[...noTengo]}); }catch(_){} }
+  if(db){ try{ await db.doc("config/medios").set({noTengo:[...noTengo], segs:[...segs]}); }catch(_){} }
 });
 $("#fecha").addEventListener("change", ()=>{ renderPicker(); calc(); });
 let tmr; $("#monto").addEventListener("input", ()=>{ clearTimeout(tmr); tmr=setTimeout(calc,150); });
@@ -516,7 +523,7 @@ $("#sync").textContent = "Conectando…";
   $("#sync").innerHTML = db.local ? 'Guardado en este dispositivo. <button class="ghost" id="btn-reset">Restaurar promos originales</button>' : "Sincronizado entre tus dispositivos.";
   db.collection("promos").onSnapshot(s=>{ const arr = s.docs.map(d=>({...d.data(), id:d.id})); promos = arr.length ? arr : FALLBACK.slice(); renderAll(); }, ()=>{ $("#sync").textContent="Se cortó la sincronización de promos. Recargá la página."; });
   db.collection("usos").onSnapshot(s=>{ usos = s.docs.map(d=>({...d.data(), _id:d.id})); renderHist(); calc(); }, ()=>{});
-  db.doc("config/medios").onSnapshot(s=>{ if(s.exists){ noTengo = new Set(s.data().noTengo||[]); store.set("noTengo",[...noTengo]); renderMedios(); renderPicker(); calc(); } }, ()=>{});
+  db.doc("config/medios").onSnapshot(s=>{ if(s.exists){ noTengo = new Set(s.data().noTengo||[]); segs = new Set(s.data().segs||[]); store.set("noTengo",[...noTengo]); store.set("segs",[...segs]); renderMedios(); renderPicker(); calc(); } }, ()=>{});
 })();
 if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
