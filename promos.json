@@ -12,7 +12,7 @@
     "minimo": 0,
     "costo": 0.0075,
     "vence": "2026-12-31",
-    "nota": "3% en USDC, tope 100 USDC/mes (~$160.000). Costo = comprar USDT en P2P y que la tarjeta lo convierta.",
+    "nota": "3% en USDC, tope 100 USDC/mes (~$160.000). Es promocional (vigente hasta fin de 2026); la tasa base fuera de la promo depende del nivel VIP/tenencia de BNB. Costo = comprar USDT en P2P y que la tarjeta lo convierta.",
     "rubro": "*"
   },
   {
@@ -73,13 +73,13 @@
     ],
     "dias": [],
     "pct": 0.0025,
-    "tope": 30000,
+    "tope": 40000,
     "periodo": "mes",
     "minimo": 0,
     "costo": 0,
     "grupo": "lemon",
     "vence": "",
-    "nota": "0,25% en BTC desde el 1/9/2026. Tope $30.000/mes compartido.",
+    "nota": "0,25% en BTC desde el 1/9/2026. Tope $40.000/mes compartido (subió desde $30.000). Sin confirmar si el % sigue en 0,25% o volvió a 0,5%: fuentes 2026 mencionan ambos esquemas.",
     "rubro": "*"
   },
   {
@@ -90,7 +90,7 @@
     ],
     "dias": [],
     "pct": 0.02,
-    "tope": 30000,
+    "tope": 40000,
     "periodo": "mes",
     "minimo": 0,
     "costo": 0.037,
@@ -112,7 +112,7 @@
     "minimo": 0,
     "costo": 0.023,
     "vence": "",
-    "nota": "1% sin VIP (2-10% con VIP). Fee 0,9% por conversión + spread.",
+    "nota": "1% sin VIP. Escalas VIP: Beta 2%, Alpha 4%, Apex 6%, Omega 8%, Infinite 10%. Fee cambiario en Argentina (~7-9%) puede licuar el cashback real.",
     "rubro": "*"
   },
   {
@@ -128,7 +128,7 @@
     "minimo": 0,
     "costo": 0,
     "vence": "",
-    "nota": "1% en acciones o cripto de la marca donde comprás. Verificá condiciones.",
+    "nota": "1% en compras domésticas (2% en internacionales), acreditado en acciones/CEDEARs o cripto de la marca donde comprás. Requiere cuenta BuenCapital habilitada y balance global ≥ USD 2.000 para elegir recibir el beneficio en acciones.",
     "rubro": "*"
   },
   {
@@ -144,7 +144,7 @@
     "minimo": 0,
     "costo": 0,
     "vence": "",
-    "nota": "50% en colectivos pagando con la tarjeta vía Apple Pay o Google Pay. Tope no publicado.",
+    "nota": "50% en colectivos pagando con la tarjeta vía Apple Pay o Google Pay. Tope no publicado. Posible suba a 100% según publicaciones recientes en redes de Fiwind: sin confirmar con fuente oficial (fiwind.io/promociones).",
     "rubro": "Transporte"
   },
   {
@@ -258,7 +258,7 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Sin tope.",
+    "nota": "Sin tope. No aplica a carnicería, productos frescos, comidas preparadas, fiambres, quesos, frutas/verduras ni huevos.",
     "rubro": "Supermercados"
   },
   {
@@ -397,6 +397,24 @@
     "rubro": "Supermercados"
   },
   {
+    "id": "bna-changomas-lunes",
+    "medio": "Banco Nación",
+    "donde": [
+      "ChangoMás"
+    ],
+    "dias": [
+      1
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 75000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Pago con MODO BNA+, tarjetas Visa/Mastercard BNA. Compra mínima $75.000.",
+    "rubro": "Supermercados"
+  },
+  {
     "id": "dni-cercania",
     "medio": "Cuenta DNI",
     "donde": [
@@ -507,7 +525,7 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Textos escolares. Sin tope.",
+    "nota": "Textos escolares. Sin tope. Una fuente (sin confirmar con una segunda) indica que esta promo podría regir sin cambios hasta el 29/12/2026.",
     "rubro": "Librerías"
   },
   {
@@ -543,29 +561,6 @@
     "vence": "2026-09-30",
     "nota": "",
     "rubro": "Garrafas"
-  },
-  {
-    "id": "galicia-combustible",
-    "medio": "Galicia",
-    "rubro": "Combustible",
-    "donde": [
-      "YPF",
-      "Shell",
-      "Axion",
-      "Puma"
-    ],
-    "dias": [],
-    "pct": 0.1,
-    "tope": 10000,
-    "periodo": "dia",
-    "minimo": 0,
-    "costo": 0,
-    "vence": "2026-10-10",
-    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo. Éminent 15% ($15.000), haberes 20% ($15.000), Éminent+haberes 25% ($20.000).",
-    "fechas": [
-      "2026-09-28",
-      "2026-10-10"
-    ]
   },
   {
     "id": "galicia-changomas",
@@ -687,12 +682,12 @@
       4
     ],
     "pct": 0.25,
-    "tope": 15000,
+    "tope": 10000,
     "periodo": "mes",
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Solo Tarjeta Galicia Débito con QR de MODO."
+    "nota": "Solo Tarjeta Galicia Débito con QR de MODO. Sin confirmar si esta promo sigue vigente: una fuente oficial de MODO la muestra con período 01/10/2025-02/08/2026."
   },
   {
     "id": "galicia-colectivo",
@@ -711,21 +706,20 @@
     "nota": "Mastercard por NFC (Apple/Google Pay, app Galicia o MODO)."
   },
   {
-    "id": "galicia-colectivo-oct",
+    "id": "galicia-subte",
     "medio": "Galicia",
     "rubro": "Transporte",
     "donde": [
-      "Colectivo"
+      "Subte"
     ],
     "dias": [],
     "pct": 1.0,
-    "tope": 25000,
+    "tope": 15000,
     "periodo": "mes",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-10-31",
-    "nota": "100% en octubre. Mastercard por NFC (Apple/Google Pay, app Galicia o MODO).",
-    "desde": "2026-10-01"
+    "vence": "",
+    "nota": "100% de reintegro en subte. Mastercard de crédito Galicia por NFC (Apple/Google Pay, app Galicia o MODO). Vigencia exacta sin confirmar, revisar en la próxima actualización."
   },
   {
     "id": "galicia-uber",
@@ -780,5 +774,21 @@
     "costo": 0,
     "vence": "2026-09-30",
     "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO). Éminent 25%."
+  },
+  {
+    "id": "uala-changomas",
+    "medio": "Ualá",
+    "rubro": "Supermercados",
+    "donde": [
+      "ChangoMás"
+    ],
+    "dias": [],
+    "pct": 0.15,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "",
+    "nota": "Sin tope ni día específico confirmado. Verificar condiciones vigentes en la app. Fuente: uala.com.ar/promociones (sin confirmar vigencia exacta)."
   }
 ]
