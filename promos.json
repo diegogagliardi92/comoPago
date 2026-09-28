@@ -397,24 +397,6 @@
     "rubro": "Supermercados"
   },
   {
-    "id": "bna-changomas-lunes",
-    "medio": "Banco Nación",
-    "donde": [
-      "ChangoMás"
-    ],
-    "dias": [
-      1
-    ],
-    "pct": 0.2,
-    "tope": 25000,
-    "periodo": "mes",
-    "minimo": 75000,
-    "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "Pago con MODO BNA+, tarjetas Visa/Mastercard BNA. Compra mínima $75.000.",
-    "rubro": "Supermercados"
-  },
-  {
     "id": "dni-cercania",
     "medio": "Cuenta DNI",
     "donde": [
@@ -682,12 +664,12 @@
       4
     ],
     "pct": 0.25,
-    "tope": 10000,
+    "tope": 15000,
     "periodo": "mes",
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Solo Tarjeta Galicia Débito con QR de MODO. Sin confirmar si esta promo sigue vigente: una fuente oficial de MODO la muestra con período 01/10/2025-02/08/2026."
+    "nota": "Solo Tarjeta Galicia Débito con QR de MODO."
   },
   {
     "id": "galicia-colectivo",
@@ -704,22 +686,6 @@
     "costo": 0,
     "vence": "2026-09-30",
     "nota": "Mastercard por NFC (Apple/Google Pay, app Galicia o MODO)."
-  },
-  {
-    "id": "galicia-subte",
-    "medio": "Galicia",
-    "rubro": "Transporte",
-    "donde": [
-      "Subte"
-    ],
-    "dias": [],
-    "pct": 1.0,
-    "tope": 15000,
-    "periodo": "mes",
-    "minimo": 0,
-    "costo": 0,
-    "vence": "",
-    "nota": "100% de reintegro en subte. Mastercard de crédito Galicia por NFC (Apple/Google Pay, app Galicia o MODO). Vigencia exacta sin confirmar, revisar en la próxima actualización."
   },
   {
     "id": "galicia-uber",
@@ -776,19 +742,43 @@
     "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO). Éminent 25%."
   },
   {
-    "id": "uala-changomas",
-    "medio": "Ualá",
-    "rubro": "Supermercados",
+    "id": "galicia-combustible",
+    "medio": "Galicia",
+    "rubro": "Combustible",
     "donde": [
-      "ChangoMás"
+      "YPF",
+      "Shell",
+      "Axion",
+      "Puma"
     ],
     "dias": [],
-    "pct": 0.15,
-    "tope": null,
-    "periodo": null,
+    "pct": 0.1,
+    "tope": 10000,
+    "periodo": "dia",
     "minimo": 0,
     "costo": 0,
-    "vence": "",
-    "nota": "Sin tope ni día específico confirmado. Verificar condiciones vigentes en la app. Fuente: uala.com.ar/promociones (sin confirmar vigencia exacta)."
+    "vence": "2026-10-10",
+    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo. Éminent 15% ($15.000), haberes 20% ($15.000), Éminent+haberes 25% ($20.000).",
+    "fechas": [
+      "2026-09-28",
+      "2026-10-10"
+    ]
+  },
+  {
+    "id": "galicia-colectivo-oct",
+    "medio": "Galicia",
+    "rubro": "Transporte",
+    "donde": [
+      "Colectivo"
+    ],
+    "dias": [],
+    "pct": 1.0,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-31",
+    "nota": "100% en octubre. Mastercard por NFC (Apple/Google Pay, app Galicia o MODO).",
+    "desde": "2026-10-01"
   }
 ]

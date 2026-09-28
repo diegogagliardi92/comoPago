@@ -36,7 +36,7 @@ Los datos que cargás desde la app quedan **en ese dispositivo** (localStorage).
 ## Publicar con GitHub Pages
 
 Settings → Pages → Source: *Deploy from a branch* → `main` / `(root)`.
-El sitio queda en `https://<usuario>.github.io/<repo>/`.
+Publicado en **https://diegogagliardi92.github.io/comoPago/**
 
 ## Instalar en el celular
 
