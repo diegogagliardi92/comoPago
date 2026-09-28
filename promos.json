@@ -278,7 +278,8 @@
     "costo": 0,
     "vence": "2026-09-30",
     "nota": "Compra mínima $100.000.",
-    "rubro": "Supermercados"
+    "rubro": "Supermercados",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/179195"
   },
   {
     "id": "galicia-dia",
@@ -297,7 +298,8 @@
     "costo": 0,
     "vence": "2026-09-30",
     "nota": "Compra mínima $35.000.",
-    "rubro": "Supermercados"
+    "rubro": "Supermercados",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/179208"
   },
   {
     "id": "macro-jumbo",
@@ -560,7 +562,8 @@
     "minimo": 75000,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Compra mínima $75.000, en un pago."
+    "nota": "Compra mínima $75.000, en un pago.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/175117"
   },
   {
     "id": "galicia-carrefour",
@@ -578,7 +581,8 @@
     "minimo": 15000,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Compra mínima $15.000. Pagando con QR de MODO (app Galicia o MODO)."
+    "nota": "Compra mínima $15.000. Pagando con QR de MODO (app Galicia o MODO).",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181863"
   },
   {
     "id": "galicia-coto",
@@ -596,7 +600,8 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-10-31",
-    "nota": "Solo productos seleccionados. Sin tope. Pagando con QR de MODO (app Galicia o MODO)."
+    "nota": "Solo productos seleccionados. Sin tope. Pagando con QR de MODO (app Galicia o MODO).",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/177518"
   },
   {
     "id": "galicia-disco",
@@ -615,7 +620,8 @@
     "minimo": 100000,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Compra mínima $100.000, en un pago."
+    "nota": "Compra mínima $100.000, en un pago.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/179190"
   },
   {
     "id": "galicia-vea",
@@ -633,7 +639,8 @@
     "minimo": 100000,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Compra mínima $100.000, en un pago."
+    "nota": "Compra mínima $100.000, en un pago.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/179192"
   },
   {
     "id": "galicia-makro",
@@ -651,7 +658,8 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Pagando con QR de MODO (app Galicia o MODO)."
+    "nota": "Pagando con QR de MODO (app Galicia o MODO).",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/179199"
   },
   {
     "id": "galicia-farmacity",
@@ -669,7 +677,8 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Solo Tarjeta Galicia Débito con QR de MODO."
+    "nota": "Solo Tarjeta Galicia Débito con QR de MODO.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181019"
   },
   {
     "id": "galicia-colectivo",
@@ -685,7 +694,8 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Mastercard por NFC (Apple/Google Pay, app Galicia o MODO)."
+    "nota": "Mastercard por NFC (Apple/Google Pay, app Galicia o MODO).",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181250"
   },
   {
     "id": "galicia-uber",
@@ -703,7 +713,8 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Débito, Visa o Mastercard. Con Amex: 30%, tope $5.000."
+    "nota": "Débito, Visa o Mastercard. Con Amex: 30%, tope $5.000.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/171844"
   },
   {
     "id": "galicia-cabify",
@@ -721,7 +732,8 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Débito, Visa o Mastercard. Con Amex: 30%, tope $5.000."
+    "nota": "Débito, Visa o Mastercard. Con Amex: 30%, tope $5.000.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/171267"
   },
   {
     "id": "galicia-puppis",
@@ -739,7 +751,8 @@
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO). Éminent 25%."
+    "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO). Éminent 25%.",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/170412"
   },
   {
     "id": "galicia-combustible",
@@ -762,7 +775,8 @@
     "fechas": [
       "2026-09-28",
       "2026-10-10"
-    ]
+    ],
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181917"
   },
   {
     "id": "galicia-colectivo-oct",
@@ -779,6 +793,7 @@
     "costo": 0,
     "vence": "2026-10-31",
     "nota": "100% en octubre. Mastercard por NFC (Apple/Google Pay, app Galicia o MODO).",
-    "desde": "2026-10-01"
+    "desde": "2026-10-01",
+    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181251"
   }
 ]

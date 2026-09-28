@@ -133,6 +133,8 @@ input,select{min-height:44px}
 .checks label{flex-direction:row;align-items:center;gap:8px;font-size:14px;color:var(--ink);padding:8px 10px;background:var(--sunk);border-radius:9px;border:1px solid var(--line)}
 .checks input{width:auto}
 .status{font-size:12px;color:var(--muted)}
+a.src{color:var(--accent);font-weight:600;white-space:nowrap}
+.ticket a.src{color:var(--lime)}
 .banner{font-size:13px;padding:10px 12px;border-radius:10px;background:var(--sunk);color:var(--muted)}
 .ticket .lbl,.ticket .why,.ticket .hint,.ticket .step,.ticket .empty{color:rgba(255,255,255,.72)}
 @media (prefers-reduced-motion:no-preference){.ticket{transition:opacity .15s}}
@@ -243,6 +245,7 @@ const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+
 const fromIso = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d); };
 const esc = s => String(s??"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const rubroOf = p => p.rubro || GEN;
+const fuente = p => /^https:\/\//.test(p.fuente||"") ? ` <a class="src" href="${esc(p.fuente)}" target="_blank" rel="noopener">Ver fuente ↗</a>` : "";
 const store = { get(k,d){ try{ const v = localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(_){ return d; } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){} } };
 
 let db = null;
@@ -369,7 +372,7 @@ function calc(){
   let html = `<div class="ticket-head"><div><div class="lbl">${esc(donde)} · ${dname} ${fecha.slice(8)}/${fecha.slice(5,7)} · ${fmt(monto)}</div><div style="font-weight:700;margin-top:4px;font-size:16px">${pl.lines.length? (pl.lines.length>1?"Dividí el pago así":"Pagá con "+esc(pl.lines[0].c.p.medio)) : "Ninguna promo aplica hoy"}</div></div><div style="text-align:right"><div class="lbl">Ahorro neto</div><div class="big num">${fmt(total)}</div></div></div><div class="tear"></div>`;
   pl.lines.forEach((l,i)=>{
     const p = l.c.p;
-    html += `<div class="line"><div class="step">${i+1}</div><div><div class="who">${esc(p.medio)} <span class="pill good">${pctf(p.pct)}</span></div><div class="why">${esc(why(l.c))}${l.lleno?" · <b>llenás el tope</b>":""}</div>${p.nota?`<div class="why">${esc(p.nota)}</div>`:""}</div><div class="amt num"><div class="pay">${fmt(l.pago)}</div><div class="back">+${fmt(l.reint - l.costo)}</div></div></div>`;
+    html += `<div class="line"><div class="step">${i+1}</div><div><div class="who">${esc(p.medio)} <span class="pill good">${pctf(p.pct)}</span></div><div class="why">${esc(why(l.c))}${l.lleno?" · <b>llenás el tope</b>":""}</div>${p.nota||p.fuente?`<div class="why">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="amt num"><div class="pay">${fmt(l.pago)}</div><div class="back">+${fmt(l.reint - l.costo)}</div></div></div>`;
   });
   if(pl.resto > 0.5){
     html += `<div class="line plain"><div class="step">${pl.lines.length+1}</div><div><div class="who">El resto, como quieras</div><div class="why">No queda ninguna promo con tope disponible para este monto.</div></div><div class="amt num"><div class="pay">${fmt(pl.resto)}</div><div class="back">+$0</div></div></div>`;
@@ -402,7 +405,7 @@ function promoRow(p, hoy){
   const venc = p.vence && p.vence < hoy;
   const d = p.donde||[GEN];
   const donde = d.includes(GEN) ? (rubroOf(p)===GEN?"Cualquier comercio":"Todas las tiendas") : d.join(", ");
-  return `<div class="row"><div><div><b>${esc(p.medio)}</b> · ${esc(donde)} <span class="pill ${venc?"bad":"good"}">${pctf(p.pct)}</span></div><div class="meta">${p.fechas&&p.fechas.length?p.fechas.map(f=>f.slice(8)+"/"+f.slice(5,7)).join(", "):p.dias&&p.dias.length?p.dias.map(x=>DIAS[x]).join(" "):"Todos los días"} · ${p.tope!=null?`tope ${fmt(p.tope)}/${PER[p.periodo]}`:"sin tope"}${p.minimo?` · mín. ${fmt(p.minimo)}`:""}${p.costo?` · costo ${pctf(p.costo)}`:""}${p.vence?` · ${venc?"venció":"vence"} ${p.vence.slice(8)}/${p.vence.slice(5,7)}`:""}</div>${p.nota?`<div class="meta">${esc(p.nota)}</div>`:""}</div><div class="acts">${db?`<button class="ghost" data-edit="${esc(p.id)}">Editar</button><button class="ghost danger" data-del="${esc(p.id)}">Borrar</button>`:""}</div></div>`;
+  return `<div class="row"><div><div><b>${esc(p.medio)}</b> · ${esc(donde)} <span class="pill ${venc?"bad":"good"}">${pctf(p.pct)}</span></div><div class="meta">${p.fechas&&p.fechas.length?p.fechas.map(f=>f.slice(8)+"/"+f.slice(5,7)).join(", "):p.dias&&p.dias.length?p.dias.map(x=>DIAS[x]).join(" "):"Todos los días"} · ${p.tope!=null?`tope ${fmt(p.tope)}/${PER[p.periodo]}`:"sin tope"}${p.minimo?` · mín. ${fmt(p.minimo)}`:""}${p.costo?` · costo ${pctf(p.costo)}`:""}${p.vence?` · ${venc?"venció":"vence"} ${p.vence.slice(8)}/${p.vence.slice(5,7)}`:""}</div>${p.nota||p.fuente?`<div class="meta">${esc(p.nota)}${fuente(p)}</div>`:""}</div><div class="acts">${db?`<button class="ghost" data-edit="${esc(p.id)}">Editar</button><button class="ghost danger" data-del="${esc(p.id)}">Borrar</button>`:""}</div></div>`;
 }
 function renderPromos(){
   const hoy = iso(new Date()), cat = catalogo();
@@ -456,6 +459,7 @@ $("#pform").addEventListener("submit", async e=>{
     pct, tope:isNaN(tope)?null:tope, periodo:isNaN(tope)?null:periodo, minimo:parseNum($("#p-min").value)||0, costo:(parseNum($("#p-costo").value)||0)/100,
     vence:$("#p-vence").value||"", nota:$("#p-nota").value.trim()};
   const g = $("#p-grupo").value.trim(); if(g) body.grupo = g;
+  const prev = promos.find(p=>p.id===editingId); if(prev?.fuente) body.fuente = prev.fuente;
   const id = editingId || (medio+"-"+(donde[0]||rubro)).toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)+"-"+Date.now().toString(36);
   body.id = id;
   if(!db){ const i = promos.findIndex(p=>p.id===id); if(i>=0) promos[i]=body; else promos.push(body); $("#pform").hidden = true; renderAll(); return; }

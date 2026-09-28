@@ -29,7 +29,8 @@ Los datos que cargás desde la app quedan **en ese dispositivo** (localStorage).
   "grupo": "nx-epico",            // opcional: promos que comparten el mismo tope
   "desde": "2026-10-01",          // opcional: empieza a valer ese día
   "vence": "2026-09-30",
-  "nota": "Plan Épico."
+  "nota": "Plan Épico.",
+  "fuente": "https://..."          // link oficial para validar la promo
 }
 ```
 
