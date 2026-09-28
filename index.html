@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2F4FE0">
+<meta name="description" content="Te dice con qué tarjeta o billetera pagar según el comercio, el día y los topes de reintegro.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Con qué pago">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>¿Con qué pago?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#F2F4F0; --surface:#FFFFFF; --sunk:#E8ECE7; --ink:#15201B; --muted:#5A6862; --line:#D6DDD8;
+  --accent:#2F4FE0; --accent-ink:#FFFFFF; --good:#13804A; --warn:#A8690F; --bad:#B93A25;
+  --good-bg:#E2F3E9; --bad-bg:#F8E6E2;
+  --sans:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--bg:#0E1412;--surface:#161E1B;--sunk:#1D2723;--ink:#E6ECE8;--muted:#95A39C;--line:#2A3531;
+  --accent:#8EA2FF;--accent-ink:#0E1412;--good:#52C58D;--warn:#E0A64A;--bad:#F07B63;--good-bg:#173226;--bad-bg:#3A1E19;}}
+:root[data-theme="dark"]{
+  color-scheme:dark;--bg:#0E1412;--surface:#161E1B;--sunk:#1D2723;--ink:#E6ECE8;--muted:#95A39C;--line:#2A3531;
+  --accent:#8EA2FF;--accent-ink:#0E1412;--good:#52C58D;--warn:#E0A64A;--bad:#F07B63;--good-bg:#173226;--bad-bg:#3A1E19;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:20px 96px;display:flex;flex-direction:column;gap:18px}
+h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0;font-weight:600}
+.sub{color:var(--muted);margin:2px 0 0;font-size:13px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.form{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px}
+@media (max-width:560px){.form{grid-template-columns:1fr 1fr}.form .f-donde{grid-column:1/-1}}
+label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);font-weight:500}
+input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--sunk);border:1px solid var(--line);border-radius:9px;padding:10px 11px;width:100%;min-width:0}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#monto{font-family:var(--mono);font-weight:600}
+button{font:inherit;cursor:pointer;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;font-weight:600}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.ghost{background:transparent;border-color:transparent;color:var(--muted);padding:6px 8px}
+button.danger{color:var(--bad)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;padding:5px 10px;border-radius:99px;background:var(--sunk);border:1px solid var(--line);font-weight:500}
+
+/* Ticket */
+.ticket{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ticket-head{padding:16px 16px 12px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.ticket-head .big{font-size:30px;font-weight:600;color:var(--good);line-height:1}
+.ticket-head .lbl{font-size:12px;color:var(--muted)}
+.tear{height:10px;background:radial-gradient(circle at 5px 0,var(--bg) 4px,transparent 4.5px) 0 0/10px 10px repeat-x;border-top:1px dashed var(--line)}
+.line{display:grid;grid-template-columns:28px 1fr auto;gap:10px;padding:12px 16px;border-top:1px solid var(--line);align-items:start}
+.line:first-of-type{border-top:0}
+.step{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:2px}
+.line .who{font-weight:600}
+.line .why{font-size:12.5px;color:var(--muted)}
+.line .amt{text-align:right}
+.line .amt .pay{font-weight:600}
+.line .amt .back{font-size:12.5px;color:var(--good)}
+.line.plain .amt .back{color:var(--muted)}
+.ticket-foot{padding:12px 16px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-top:1px dashed var(--line)}
+.hint{font-size:12.5px;color:var(--muted)}
+.empty{padding:18px 16px;color:var(--muted)}
+
+/* Ranking */
+.tbl-wrap{overflow-x:auto;margin-inline:-16px;padding-inline:16px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:560px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.r,th.r{text-align:right}
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.pill.warn{background:var(--sunk);color:var(--warn)}
+.meter{height:5px;border-radius:3px;background:var(--sunk);overflow:hidden;margin-top:5px;max-width:120px}
+.meter i{display:block;height:100%;background:var(--accent)}
+
+/* Picker */
+.rubros{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.rubro{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:12px;border-radius:12px;background:var(--sunk);border:1px solid var(--line);min-height:62px}
+.rubro b{font-size:14.5px}
+.rubro span{font-size:12px;color:var(--muted);font-weight:500}
+.rubro.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.rubro span.hot{color:var(--good)}
+.crumb{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.crumb .path{font-weight:700;font-size:17px}
+.crumb .path small{color:var(--muted);font-weight:500}
+.tiendas{display:flex;flex-wrap:wrap;gap:8px}
+.tienda{padding:10px 14px;border-radius:99px;background:var(--sunk);border:1px solid var(--line);font-weight:600;font-size:14px}
+.tienda.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.opts{display:flex;flex-direction:column}
+.opt{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.opt:last-child{border-bottom:0}
+.opt .r{text-align:right}
+.opt .kv{grid-column:1/-1;display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.opt .kv b{color:var(--ink);font-weight:600}
+details.grp{border-bottom:1px solid var(--line)}
+details.grp:last-child{border-bottom:0}
+details.grp summary{cursor:pointer;padding:12px 0;font-weight:700;display:flex;justify-content:space-between;list-style:none}
+details.grp summary::-webkit-details-marker{display:none}
+details.grp summary::after{content:"+";color:var(--muted);font-weight:500}
+details.grp[open] summary::after{content:"–"}
+details.grp .list{padding-bottom:6px}
+input,select{min-height:44px}
+/* Tabs */
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;gap:4px;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+.tabs button{border:0;background:transparent;color:var(--muted);font-size:13px;padding:8px 10px;white-space:nowrap;flex:1 1 0;max-width:140px}
+.tabs button[aria-selected="true"]{color:var(--accent);background:var(--sunk)}
+.list{display:flex;flex-direction:column}
+.row{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.row:last-child{border-bottom:0}
+.row .meta{font-size:12.5px;color:var(--muted)}
+.row .acts{display:flex;gap:2px;flex-shrink:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:460px){.grid2{grid-template-columns:1fr}}
+.days{display:flex;gap:4px;flex-wrap:wrap}
+.days label{flex-direction:row;align-items:center;gap:3px;font-size:13px;color:var(--ink);background:var(--sunk);border:1px solid var(--line);border-radius:7px;padding:5px 8px}
+.days input{width:auto}
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}
+.checks label{flex-direction:row;align-items:center;gap:8px;font-size:14px;color:var(--ink);padding:8px 10px;background:var(--sunk);border-radius:9px;border:1px solid var(--line)}
+.checks input{width:auto}
+.status{font-size:12px;color:var(--muted)}
+.banner{font-size:13px;padding:10px 12px;border-radius:10px;background:var(--sunk);color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.ticket{transition:opacity .15s}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <h1>¿Con qué pago?</h1>
+    <p class="sub">Elegí dónde estás y cuánto vas a gastar. Te digo con qué pagar y hasta cuánto rinde cada tope.</p>
+  </header>
+
+  <section id="v-calc" class="view" style="display:flex;flex-direction:column;gap:14px">
+    <div class="panel" id="picker"></div>
+    <div class="panel">
+      <div class="form" style="grid-template-columns:1fr 1fr">
+        <label for="monto">Monto ($)
+          <input id="monto" inputmode="numeric" autocomplete="off" value="80.000">
+        </label>
+        <label for="fecha">Día
+          <input id="fecha" type="date">
+        </label>
+      </div>
+    </div>
+
+    <div class="ticket" id="ticket"></div>
+
+    <div class="panel">
+      <h2>Todas las opciones para este pago</h2>
+      <div class="opts" id="rank"></div>
+      <p class="hint" style="margin:0">Neto = reintegro menos el costo de pasar a cripto. "Rinde hasta" es cuánto podés gastar antes de llenar el tope, descontando lo que ya usaste.</p>
+    </div>
+  </section>
+
+  <section id="v-promos" class="view" hidden>
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+        <h2>Promos cargadas</h2>
+        <button class="primary" id="btn-new">Agregar promo</button>
+      </div>
+      <form id="pform" class="panel" style="background:var(--sunk)" hidden>
+        <div class="grid2">
+          <label for="p-medio">Medio de pago<input id="p-medio" required placeholder="Ej: MODO"></label>
+          <label for="p-rubro">Rubro (vacío = cualquier rubro)<input id="p-rubro" list="rubros-dl" placeholder="Supermercados"></label>
+          <label for="p-donde">Tiendas (separá con coma, vacío = todas las del rubro)<input id="p-donde" placeholder="Jumbo, Disco"></label>
+          <label for="p-pct">Reintegro %<input id="p-pct" inputmode="decimal" required placeholder="20"></label>
+          <label for="p-tope">Tope de reintegro $ (vacío = sin tope)<input id="p-tope" inputmode="numeric" placeholder="25000"></label>
+          <label for="p-periodo">El tope es por<select id="p-periodo"><option value="">sin tope</option><option value="dia">día</option><option value="semana">semana</option><option value="mes">mes</option></select></label>
+          <label for="p-min">Compra mínima $<input id="p-min" inputmode="numeric" placeholder="0"></label>
+          <label for="p-costo">Costo extra % (spread cripto)<input id="p-costo" inputmode="decimal" placeholder="0"></label>
+          <label for="p-grupo">Tope compartido con (código)<input id="p-grupo" placeholder="opcional"></label>
+          <label for="p-vence">Vence<input id="p-vence" type="date"></label>
+          <label for="p-nota">Nota<input id="p-nota"></label>
+        </div>
+        <div>
+          <div class="status" style="margin-bottom:6px">Días (ninguno = todos)</div>
+          <div class="days" id="p-dias"></div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="primary" type="submit">Guardar</button>
+          <button type="button" id="p-cancel">Cancelar</button>
+          <span class="status" id="p-msg"></span>
+        </div>
+      </form>
+      <datalist id="rubros-dl"></datalist><div id="plist"></div>
+    </div>
+  </section>
+
+  <section id="v-medios" class="view" hidden>
+    <div class="panel">
+      <h2>Mis medios de pago</h2>
+      <p class="hint" style="margin:0">Destildá los que no tenés y no los voy a sugerir.</p>
+      <div class="checks" id="mlist"></div>
+    </div>
+  </section>
+
+  <section id="v-hist" class="view" hidden>
+    <div class="panel">
+      <h2>Compras registradas</h2>
+      <p class="hint" style="margin:0">Cada compra registrada descuenta del tope del período. Borrá las que cargaste por error.</p>
+      <div class="list" id="hlist"></div>
+    </div>
+  </section>
+
+  <p class="status" id="sync"></p>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" data-v="calc" aria-selected="true">Calcular</button>
+  <button role="tab" data-v="promos" aria-selected="false">Promos</button>
+  <button role="tab" data-v="medios" aria-selected="false">Mis medios</button>
+  <button role="tab" data-v="hist" aria-selected="false">Historial</button>
+</nav>
+
+<script src="local-db.js"></script>
+<script>
+const FALLBACK = [];
+const DIAS = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+const PER = {dia:"día",semana:"semana",mes:"mes"};
+const GEN = "*";
+const $ = s => document.querySelector(s);
+const fmt = n => (n<0?"-$":"$") + Math.abs(Math.round(n)).toLocaleString("es-AR");
+const pctf = p => (Math.round(p*1000)/10).toLocaleString("es-AR") + "%";
+const parseNum = s => { s = String(s||"").trim(); if(!s) return NaN; s = s.replace(/\$/g,"").replace(/\./g,"").replace(",","."); return Number(s); };
+const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const fromIso = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d); };
+const esc = s => String(s??"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const rubroOf = p => p.rubro || GEN;
+const store = { get(k,d){ try{ const v = localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(_){ return d; } }, set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){} } };
+
+let db = null;
+let promos = FALLBACK.slice();
+let usos = [];
+let noTengo = new Set(store.get("noTengo", []));
+let editingId = null;
+let sel = store.get("sel", {rubro:"Supermercados", tienda:"Jumbo"});
+let pickerOpen = false;
+
+function periodKey(dateStr, periodo){
+  if(periodo==="dia") return dateStr;
+  if(periodo==="mes") return dateStr.slice(0,7);
+  if(periodo==="semana"){ const d = fromIso(dateStr); const w = (d.getDay()+6)%7; d.setDate(d.getDate()-w); return "w"+iso(d); }
+  return "";
+}
+const capKey = p => p.grupo || p.id;
+function usado(p, fecha){
+  if(p.tope==null) return 0;
+  const k = capKey(p), pk = periodKey(fecha, p.periodo);
+  return usos.filter(u => u.key===k && periodKey(u.fecha, p.periodo)===pk).reduce((a,u)=>a+(u.reintegro||0),0);
+}
+function vigenteHoy(p, fecha){
+  if(p.vence && fecha > p.vence) return false;
+  if(p.dias && p.dias.length && !p.dias.includes(fromIso(fecha).getDay())) return false;
+  return !noTengo.has(p.medio);
+}
+function aplica(p, rubro, tienda, fecha){
+  if(!vigenteHoy(p, fecha)) return false;
+  const r = rubroOf(p), d = p.donde||[GEN];
+  if(r===GEN) return d.includes(GEN) || d.includes(tienda);
+  if(r!==rubro) return false;
+  return d.includes(GEN) || d.includes(tienda);
+}
+function candidatos(rubro, tienda, fecha, monto){
+  return promos.filter(p => aplica(p, rubro, tienda, fecha)).map(p => {
+    const restante = p.tope==null ? Infinity : Math.max(0, p.tope - usado(p, fecha));
+    const hasta = p.tope==null ? Infinity : restante / p.pct;
+    const neto = p.pct - (p.costo||0);
+    const pagoTodo = monto >= (p.minimo||0) ? Math.min(monto*p.pct, restante) - monto*(p.costo||0) : 0;
+    return {p, restante, hasta, neto, pagoTodo};
+  }).sort((a,b) => b.neto - a.neto || b.hasta - a.hasta);
+}
+function plan(cands, monto){
+  let resto = monto; const lines = []; const usadas = new Set();
+  for(const c of cands){
+    if(resto <= 0) break;
+    if(c.neto <= 0 || c.restante <= 0 || usadas.has(capKey(c.p))) continue;
+    const min = c.p.minimo||0;
+    let chunk = Math.min(resto, c.hasta);
+    if(chunk < min){ if(resto >= min) chunk = min; else continue; }
+    const reint = Math.min(chunk*c.p.pct, c.restante);
+    lines.push({c, pago:chunk, reint, costo:chunk*(c.p.costo||0), lleno: c.hasta!==Infinity && chunk >= c.hasta - 1});
+    usadas.add(capKey(c.p)); resto -= chunk;
+  }
+  return {lines, resto};
+}
+
+// Catalog: rubro -> tiendas
+function catalogo(){
+  const cat = new Map();
+  promos.forEach(p=>{
+    const r = rubroOf(p); if(r===GEN) return;
+    if(!cat.has(r)) cat.set(r, new Set());
+    (p.donde||[]).forEach(d=>{ if(d!==GEN) cat.get(r).add(d); });
+  });
+  return cat;
+}
+const ORDEN = ["Supermercados","Gastronomía","Farmacias y perfumerías","Combustible","Comercio de barrio","Ferias y mercados","Transporte","Mascotas","Librerías","Garrafas"];
+function rubrosOrdenados(cat){ return [...cat.keys()].sort((a,b)=>{ const ia=ORDEN.indexOf(a), ib=ORDEN.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib) || a.localeCompare(b,"es"); }); }
+function promosHoy(rubro, fecha){ return promos.filter(p => rubroOf(p)===rubro && vigenteHoy(p, fecha)).length; }
+
+function renderPicker(){
+  const cat = catalogo(), fecha = $("#fecha").value || iso(new Date());
+  if(!cat.size){ $("#picker").innerHTML = `<p class="hint" style="margin:0">Cargando promos…</p>`; return; }
+  if(sel.rubro!==GEN && !cat.has(sel.rubro)) sel = {rubro:rubrosOrdenados(cat)[0]||GEN, tienda:GEN};
+  const tiendas = sel.rubro===GEN ? [] : [...(cat.get(sel.rubro)||[])].sort((a,b)=>a.localeCompare(b,"es"));
+  if(sel.tienda!==GEN && !tiendas.includes(sel.tienda)) sel.tienda = tiendas[0] || GEN;
+  const rname = sel.rubro===GEN ? "Otro rubro" : sel.rubro;
+  const tname = sel.tienda===GEN ? (tiendas.length ? "Otra tienda" : "Cualquier comercio") : sel.tienda;
+  let h = "";
+  if(pickerOpen){
+    h += `<div class="crumb"><h2>Elegí el rubro</h2><button class="ghost" data-close="1">Listo</button></div><div class="rubros">`;
+    rubrosOrdenados(cat).forEach(r=>{
+      const n = promosHoy(r, fecha);
+      h += `<button class="rubro${r===sel.rubro?" on":""}" data-rubro="${esc(r)}"><b>${esc(r)}</b><span class="${n?"hot":""}">${n? n+(n>1?" promos hoy":" promo hoy") : "sin promos hoy"}</span></button>`;
+    });
+    h += `<button class="rubro${sel.rubro===GEN?" on":""}" data-rubro="${GEN}"><b>Otro rubro</b><span>solo tarjetas generales</span></button></div>`;
+  } else {
+    h += `<div class="crumb"><div class="path">${esc(rname)} <small>›</small> ${esc(tname)}</div><button data-open="1">Cambiar rubro</button></div>`;
+  }
+  if(sel.rubro!==GEN){
+    h += `<div class="tiendas">` + tiendas.map(t=>`<button class="tienda${t===sel.tienda?" on":""}" data-tienda="${esc(t)}">${esc(t)}</button>`).join("")
+      + `<button class="tienda${sel.tienda===GEN?" on":""}" data-tienda="${GEN}">${tiendas.length?"Otra tienda":"Cualquier comercio"}</button></div>`;
+  }
+  $("#picker").innerHTML = h;
+  store.set("sel", sel);
+}
+
+function why(c){
+  const p = c.p, bits = [];
+  if(p.tope!=null) bits.push(`tope ${fmt(p.tope)}/${PER[p.periodo]||"—"}` + (c.restante < p.tope ? `, te quedan ${fmt(c.restante)}` : ""));
+  else bits.push("sin tope");
+  if(p.minimo) bits.push(`mín. ${fmt(p.minimo)}`);
+  if(p.costo) bits.push(`costo ${pctf(p.costo)}`);
+  return bits.join(" · ");
+}
+
+let lastPlan = null;
+function calc(){
+  const fecha = $("#fecha").value || iso(new Date());
+  const monto = parseNum($("#monto").value);
+  const {rubro, tienda} = sel;
+  const t = $("#ticket");
+  if(!(monto>0)){ t.innerHTML = `<div class="empty">Poné un monto para calcular.</div>`; $("#rank").innerHTML=""; lastPlan=null; return; }
+  const cands = candidatos(rubro, tienda, fecha, monto);
+  const pl = plan(cands, monto);
+  const donde = tienda!==GEN ? tienda : (rubro!==GEN ? rubro : "Otro comercio");
+  lastPlan = {donde, rubro, fecha, monto, pl};
+  const total = pl.lines.reduce((a,l)=>a+l.reint-l.costo,0);
+  const dname = DIAS[fromIso(fecha).getDay()];
+  let html = `<div class="ticket-head"><div><div class="lbl">${esc(donde)} · ${dname} ${fecha.slice(8)}/${fecha.slice(5,7)} · ${fmt(monto)}</div><div style="font-weight:700;margin-top:4px;font-size:16px">${pl.lines.length? (pl.lines.length>1?"Dividí el pago así":"Pagá con "+esc(pl.lines[0].c.p.medio)) : "Ninguna promo aplica hoy"}</div></div><div style="text-align:right"><div class="lbl">Ahorro neto</div><div class="big num">${fmt(total)}</div></div></div><div class="tear"></div>`;
+  pl.lines.forEach((l,i)=>{
+    const p = l.c.p;
+    html += `<div class="line"><div class="step">${i+1}</div><div><div class="who">${esc(p.medio)} <span class="pill good">${pctf(p.pct)}</span></div><div class="why">${esc(why(l.c))}${l.lleno?" · <b>llenás el tope</b>":""}</div>${p.nota?`<div class="why">${esc(p.nota)}</div>`:""}</div><div class="amt num"><div class="pay">${fmt(l.pago)}</div><div class="back">+${fmt(l.reint - l.costo)}</div></div></div>`;
+  });
+  if(pl.resto > 0.5){
+    html += `<div class="line plain"><div class="step">${pl.lines.length+1}</div><div><div class="who">El resto, como quieras</div><div class="why">No queda ninguna promo con tope disponible para este monto.</div></div><div class="amt num"><div class="pay">${fmt(pl.resto)}</div><div class="back">+$0</div></div></div>`;
+  }
+  const first = pl.lines[0];
+  html += `<div class="ticket-foot"><span class="hint">${first && first.c.hasta!==Infinity ? `Con ${esc(first.c.p.medio)} rinde hasta <b class="num">${fmt(first.c.hasta)}</b> de compra.` : (pl.lines.length>1?"Pedí pagar en dos tickets o dos cobros.":"")}</span>${pl.lines.length?`<button class="primary" id="btn-reg">Registrar compra</button>`:""}</div>`;
+  t.innerHTML = html;
+
+  $("#rank").innerHTML = cands.length ? cands.map(c=>{
+    const p=c.p, pillc = c.neto>0.001?"good":(c.neto<-0.001?"bad":"warn");
+    const usedFrac = p.tope==null?0:Math.min(1,(p.tope-c.restante)/p.tope);
+    const bajoMin = monto < (p.minimo||0);
+    return `<div class="opt"><div><b>${esc(p.medio)}</b> <span class="hint">${esc(rubroOf(p)===GEN?"general":"")}</span><div class="hint">${esc(why(c))}</div>${p.tope!=null?`<div class="meter" title="Tope usado"><i style="width:${usedFrac*100}%"></i></div>`:""}</div><div class="r"><span class="pill ${pillc} num">neto ${pctf(c.neto)}</span></div><div class="kv"><span>Reintegro <b class="num">${pctf(p.pct)}</b></span><span>Rinde hasta <b class="num">${c.hasta===Infinity?"sin tope":(c.restante<=0?"tope lleno":fmt(c.hasta))}</b></span><span>Si pagás todo <b class="num">${bajoMin?"no llega al mín.":fmt(c.pagoTodo)}</b></span></div></div>`;
+  }).join("") : `<p class="hint">Ninguna promo cargada aplica a este comercio y día.</p>`;
+}
+
+async function registrar(btn){
+  if(!lastPlan) return;
+  const {donde, fecha, pl} = lastPlan;
+  const docs = pl.lines.map(l => ({key:capKey(l.c.p), promoId:l.c.p.id, medio:l.c.p.medio, donde, fecha, pago:Math.round(l.pago), reintegro:Math.round(l.reint), ts:Date.now()}));
+  btn.disabled = true;
+  try{
+    if(db){ for(const d of docs) await db.collection("usos").add(d); }
+    else { usos = usos.concat(docs); renderHist(); calc(); }
+    btn.textContent = "Registrada";
+  }catch(e){ btn.disabled=false; btn.textContent="No se pudo guardar, reintentá"; }
+}
+
+function promoRow(p, hoy){
+  const venc = p.vence && p.vence < hoy;
+  const d = p.donde||[GEN];
+  const donde = d.includes(GEN) ? (rubroOf(p)===GEN?"Cualquier comercio":"Todas las tiendas") : d.join(", ");
+  return `<div class="row"><div><div><b>${esc(p.medio)}</b> · ${esc(donde)} <span class="pill ${venc?"bad":"good"}">${pctf(p.pct)}</span></div><div class="meta">${p.dias&&p.dias.length?p.dias.map(x=>DIAS[x]).join(" "):"Todos los días"} · ${p.tope!=null?`tope ${fmt(p.tope)}/${PER[p.periodo]}`:"sin tope"}${p.minimo?` · mín. ${fmt(p.minimo)}`:""}${p.costo?` · costo ${pctf(p.costo)}`:""}${p.vence?` · ${venc?"venció":"vence"} ${p.vence.slice(8)}/${p.vence.slice(5,7)}`:""}</div>${p.nota?`<div class="meta">${esc(p.nota)}</div>`:""}</div><div class="acts">${db?`<button class="ghost" data-edit="${esc(p.id)}">Editar</button><button class="ghost danger" data-del="${esc(p.id)}">Borrar</button>`:""}</div></div>`;
+}
+function renderPromos(){
+  const hoy = iso(new Date()), cat = catalogo();
+  const grupos = [[GEN, "Tarjetas y billeteras (cualquier comercio)"], ...rubrosOrdenados(cat).map(r=>[r,r])];
+  const openSet = new Set([...document.querySelectorAll("details.grp[open]")].map(d=>d.dataset.r));
+  $("#plist").innerHTML = grupos.map(([r,label])=>{
+    const ps = promos.filter(p=>rubroOf(p)===r).sort((a,b)=>(a.donde||[]).join().localeCompare((b.donde||[]).join(),"es")||a.medio.localeCompare(b.medio,"es"));
+    if(!ps.length) return "";
+    return `<details class="grp" data-r="${esc(r)}" ${openSet.has(r)?"open":""}><summary><span>${esc(label)}</span><span class="hint" style="margin-left:auto;margin-right:10px">${ps.length}</span></summary><div class="list">${ps.map(p=>promoRow(p,hoy)).join("")}</div></details>`;
+  }).join("") || `<p class="hint">No hay promos cargadas.</p>`;
+  $("#rubros-dl").innerHTML = rubrosOrdenados(cat).map(r=>`<option value="${esc(r)}">`).join("");
+}
+function renderMedios(){
+  const ms = [...new Set(promos.map(p=>p.medio))].sort((a,b)=>a.localeCompare(b,"es"));
+  $("#mlist").innerHTML = ms.map((m,i)=>`<label for="m${i}"><input type="checkbox" id="m${i}" data-m="${esc(m)}" ${noTengo.has(m)?"":"checked"}> ${esc(m)}</label>`).join("");
+}
+function renderHist(){
+  const list = usos.slice().sort((a,b)=>(b.ts||0)-(a.ts||0));
+  $("#hlist").innerHTML = list.map(u=>`<div class="row"><div><div><b>${esc(u.medio)}</b> · ${esc(u.donde==="*"?"Otro comercio":u.donde)}</div><div class="meta num">${u.fecha.slice(8)}/${u.fecha.slice(5,7)} · pagaste ${fmt(u.pago)} · reintegro ${fmt(u.reintegro)}</div></div><div class="acts"><button class="ghost danger" data-udel="${esc(u._id||"")}">Borrar</button></div></div>`).join("") || `<p class="hint">Todavía no registraste compras.</p>`;
+}
+function renderAll(){ renderPicker(); renderPromos(); renderMedios(); renderHist(); calc(); }
+
+// Promo form
+const dBox = $("#p-dias");
+dBox.innerHTML = [1,2,3,4,5,6,0].map(d=>`<label for="pd${d}"><input type="checkbox" id="pd${d}" value="${d}"> ${DIAS[d]}</label>`).join("");
+const pctTxt = v => String(Math.round(v*1000)/10).replace(".",",");
+function openForm(p){
+  editingId = p ? p.id : null;
+  $("#pform").hidden = false;
+  const d = p ? (p.donde||[]).filter(x=>x!==GEN) : [];
+  $("#p-medio").value = p?.medio||""; $("#p-rubro").value = p && rubroOf(p)!==GEN ? p.rubro : (p?"":(sel.rubro!==GEN?sel.rubro:""));
+  $("#p-donde").value = d.join(", ");
+  $("#p-pct").value = p? pctTxt(p.pct):""; $("#p-tope").value = p?.tope??"";
+  $("#p-periodo").value = p?.periodo||""; $("#p-min").value = p?.minimo||""; $("#p-costo").value = p?.costo? pctTxt(p.costo):"";
+  $("#p-grupo").value = p?.grupo||""; $("#p-vence").value = p?.vence||""; $("#p-nota").value = p?.nota||"";
+  dBox.querySelectorAll("input").forEach(i=>i.checked = !!(p && p.dias && p.dias.includes(Number(i.value))));
+  $("#p-msg").textContent = ""; $("#p-medio").focus();
+}
+$("#btn-new").onclick = () => openForm(null);
+$("#p-cancel").onclick = () => { $("#pform").hidden = true; };
+$("#pform").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const pct = parseNum($("#p-pct").value)/100, tope = parseNum($("#p-tope").value);
+  if(!(pct>0)){ $("#p-msg").textContent="Poné el porcentaje de reintegro, por ejemplo 20."; return; }
+  const periodo = $("#p-periodo").value || null;
+  if(!isNaN(tope) && !periodo){ $("#p-msg").textContent="Elegí si el tope es por día, semana o mes."; return; }
+  const medio = $("#p-medio").value.trim();
+  const rubro = $("#p-rubro").value.trim() || GEN;
+  const donde = $("#p-donde").value.split(",").map(s=>s.trim()).filter(Boolean);
+  const body = {medio, rubro, donde: donde.length?donde:[GEN], dias:[...dBox.querySelectorAll("input:checked")].map(i=>Number(i.value)),
+    pct, tope:isNaN(tope)?null:tope, periodo:isNaN(tope)?null:periodo, minimo:parseNum($("#p-min").value)||0, costo:(parseNum($("#p-costo").value)||0)/100,
+    vence:$("#p-vence").value||"", nota:$("#p-nota").value.trim()};
+  const g = $("#p-grupo").value.trim(); if(g) body.grupo = g;
+  const id = editingId || (medio+"-"+(donde[0]||rubro)).toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)+"-"+Date.now().toString(36);
+  body.id = id;
+  if(!db){ const i = promos.findIndex(p=>p.id===id); if(i>=0) promos[i]=body; else promos.push(body); $("#pform").hidden = true; renderAll(); return; }
+  try{ await db.collection("promos").doc(id).set(body); $("#pform").hidden = true; }
+  catch(err){ $("#p-msg").textContent = "No se pudo guardar. Revisá los datos y reintentá."; }
+});
+
+function arm(t, fn){
+  if(t.dataset.armed){ fn(); return; }
+  t.dataset.armed="1"; t.textContent="¿Seguro?";
+  setTimeout(()=>{ if(t.isConnected){ delete t.dataset.armed; t.textContent="Borrar"; } }, 3000);
+}
+document.addEventListener("click", e=>{
+  const t = e.target.closest("button"); if(!t) return;
+  if(t.dataset.open){ pickerOpen = true; renderPicker(); }
+  if(t.dataset.close){ pickerOpen = false; renderPicker(); }
+  if(t.dataset.rubro!==undefined){
+    const cat = catalogo(); const r = t.dataset.rubro;
+    const ts = r===GEN ? [] : [...(cat.get(r)||[])].sort((a,b)=>a.localeCompare(b,"es"));
+    sel = {rubro:r, tienda: ts.length===1 ? ts[0] : GEN};
+    pickerOpen = false; renderPicker(); calc();
+  }
+  if(t.dataset.tienda!==undefined){ sel.tienda = t.dataset.tienda; renderPicker(); calc(); }
+  if(t.id==="btn-reg") registrar(t);
+  if(t.id==="btn-reset") arm(t, ()=>{ db.resetPromos(); t.textContent="Restauradas"; });
+  if(t.dataset.v){ document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected", b===t)); document.querySelectorAll(".view").forEach(v=>v.hidden = v.id!=="v-"+t.dataset.v); window.scrollTo(0,0); }
+  if(t.dataset.edit){ openForm(promos.find(p=>p.id===t.dataset.edit)); window.scrollTo(0,0); }
+  if(t.dataset.del) arm(t, async()=>{ try{ await db.collection("promos").doc(t.dataset.del).delete(); }catch(_){ t.textContent="Error"; } });
+  if(t.dataset.udel!==undefined) arm(t, async()=>{
+    if(db && t.dataset.udel){ try{ await db.collection("usos").doc(t.dataset.udel).delete(); }catch(_){ t.textContent="Error"; } }
+    else { usos = usos.filter(u=>u!==usos.find(x=>!x._id)); renderHist(); calc(); }
+  });
+});
+$("#mlist").addEventListener("change", async e=>{
+  const m = e.target.dataset.m; if(!m) return;
+  e.target.checked ? noTengo.delete(m) : noTengo.add(m);
+  store.set("noTengo", [...noTengo]);
+  renderPicker(); calc();
+  if(db){ try{ await db.doc("config/medios").set({noTengo:[...noTengo]}); }catch(_){} }
+});
+$("#fecha").addEventListener("change", ()=>{ renderPicker(); calc(); });
+let tmr; $("#monto").addEventListener("input", ()=>{ clearTimeout(tmr); tmr=setTimeout(calc,150); });
+$("#monto").addEventListener("focus", e=>{ setTimeout(()=>e.target.select(),0); });
+$("#monto").addEventListener("blur", ()=>{ const n=parseNum($("#monto").value); if(n>0) $("#monto").value = Math.round(n).toLocaleString("es-AR"); });
+
+$("#fecha").value = iso(new Date());
+renderAll();
+$("#sync").textContent = "Conectando…";
+
+(async()=>{
+  db = window.claude?.use ? await window.claude.use("db") : null;
+  if(!db && window.LocalDB) db = await window.LocalDB.create();
+  if(!db){ $("#sync").textContent = "Sin almacenamiento: lo que registres se pierde al cerrar."; renderPromos(); return; }
+  $("#sync").innerHTML = db.local ? 'Guardado en este dispositivo. <button class="ghost" id="btn-reset">Restaurar promos originales</button>' : "Sincronizado entre tus dispositivos.";
+  db.collection("promos").onSnapshot(s=>{ const arr = s.docs.map(d=>({...d.data(), id:d.id})); promos = arr.length ? arr : FALLBACK.slice(); renderAll(); }, ()=>{ $("#sync").textContent="Se cortó la sincronización de promos. Recargá la página."; });
+  db.collection("usos").onSnapshot(s=>{ usos = s.docs.map(d=>({...d.data(), _id:d.id})); renderHist(); calc(); }, ()=>{});
+  db.doc("config/medios").onSnapshot(s=>{ if(s.exists){ noTengo = new Set(s.data().noTengo||[]); store.set("noTengo",[...noTengo]); renderMedios(); renderPicker(); calc(); } }, ()=>{});
+})();
+if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+
+</body>
+</html>

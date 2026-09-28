@@ -1,0 +1,16 @@
+{
+  "name": "¿Con qué pago?",
+  "short_name": "Con qué pago",
+  "description": "Con qué tarjeta o billetera conviene pagar según comercio, día y topes de reintegro.",
+  "lang": "es-AR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F2F4F0",
+  "theme_color": "#2F4FE0",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
