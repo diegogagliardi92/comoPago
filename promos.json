@@ -555,15 +555,230 @@
       "Puma"
     ],
     "dias": [],
+    "pct": 0.1,
+    "tope": 10000,
+    "periodo": "dia",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-10",
+    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo. Éminent 15% ($15.000), haberes 20% ($15.000), Éminent+haberes 25% ($20.000).",
     "fechas": [
-      "2026-09-10"
+      "2026-09-28",
+      "2026-10-10"
+    ]
+  },
+  {
+    "id": "galicia-changomas",
+    "medio": "Galicia",
+    "rubro": "Supermercados",
+    "donde": [
+      "ChangoMás"
+    ],
+    "dias": [
+      1
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 75000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Compra mínima $75.000, en un pago."
+  },
+  {
+    "id": "galicia-carrefour",
+    "medio": "Galicia",
+    "rubro": "Supermercados",
+    "donde": [
+      "Carrefour"
+    ],
+    "dias": [
+      3
     ],
     "pct": 0.1,
+    "tope": 10000,
+    "periodo": "mes",
+    "minimo": 15000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Compra mínima $15.000. Pagando con QR de MODO (app Galicia o MODO)."
+  },
+  {
+    "id": "galicia-coto",
+    "medio": "Galicia",
+    "rubro": "Supermercados",
+    "donde": [
+      "Coto"
+    ],
+    "dias": [
+      2
+    ],
+    "pct": 0.2,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-31",
+    "nota": "Solo productos seleccionados. Sin tope. Pagando con QR de MODO (app Galicia o MODO)."
+  },
+  {
+    "id": "galicia-disco",
+    "medio": "Galicia",
+    "rubro": "Supermercados",
+    "donde": [
+      "Disco"
+    ],
+    "dias": [
+      5,
+      6
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 100000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Compra mínima $100.000, en un pago."
+  },
+  {
+    "id": "galicia-vea",
+    "medio": "Galicia",
+    "rubro": "Supermercados",
+    "donde": [
+      "Vea"
+    ],
+    "dias": [
+      5
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 100000,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Compra mínima $100.000, en un pago."
+  },
+  {
+    "id": "galicia-makro",
+    "medio": "Galicia",
+    "rubro": "Supermercados",
+    "donde": [
+      "Makro"
+    ],
+    "dias": [
+      4
+    ],
+    "pct": 0.2,
+    "tope": 20000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Pagando con QR de MODO (app Galicia o MODO)."
+  },
+  {
+    "id": "galicia-farmacity",
+    "medio": "Galicia",
+    "rubro": "Farmacias y perfumerías",
+    "donde": [
+      "Farmacity"
+    ],
+    "dias": [
+      4
+    ],
+    "pct": 0.25,
+    "tope": 15000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Solo Tarjeta Galicia Débito con QR de MODO."
+  },
+  {
+    "id": "galicia-colectivo",
+    "medio": "Galicia",
+    "rubro": "Transporte",
+    "donde": [
+      "Colectivo"
+    ],
+    "dias": [],
+    "pct": 0.5,
+    "tope": 15000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Mastercard por NFC (Apple/Google Pay, app Galicia o MODO)."
+  },
+  {
+    "id": "galicia-colectivo-oct",
+    "medio": "Galicia",
+    "rubro": "Transporte",
+    "donde": [
+      "Colectivo"
+    ],
+    "dias": [],
+    "pct": 1.0,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-31",
+    "nota": "100% en octubre. Mastercard por NFC (Apple/Google Pay, app Galicia o MODO).",
+    "desde": "2026-10-01"
+  },
+  {
+    "id": "galicia-uber",
+    "medio": "Galicia",
+    "rubro": "Transporte",
+    "donde": [
+      "Uber"
+    ],
+    "dias": [
+      3
+    ],
+    "pct": 0.2,
+    "tope": 3000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Débito, Visa o Mastercard. Con Amex: 30%, tope $5.000."
+  },
+  {
+    "id": "galicia-cabify",
+    "medio": "Galicia",
+    "rubro": "Transporte",
+    "donde": [
+      "Cabify"
+    ],
+    "dias": [
+      0
+    ],
+    "pct": 0.2,
+    "tope": 3000,
+    "periodo": "mes",
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-09-30",
+    "nota": "Débito, Visa o Mastercard. Con Amex: 30%, tope $5.000."
+  },
+  {
+    "id": "galicia-puppis",
+    "medio": "Galicia",
+    "rubro": "Mascotas",
+    "donde": [
+      "Puppis"
+    ],
+    "dias": [
+      4
+    ],
+    "pct": 0.2,
     "tope": 10000,
     "periodo": "mes",
     "minimo": 0,
     "costo": 0,
     "vence": "2026-09-30",
-    "nota": "Solo un día al mes. Mastercard contactless (Apple/Google Pay) o QR MODO. Éminent: 15%, tope $15.000."
+    "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO). Éminent 25%."
   }
 ]

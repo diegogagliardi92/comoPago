@@ -267,6 +267,7 @@ function usado(p, fecha){
 }
 function vigenteHoy(p, fecha){
   if(p.vence && fecha > p.vence) return false;
+  if(p.desde && fecha < p.desde) return false;
   if(p.fechas && p.fechas.length && !p.fechas.includes(fecha)) return false;
   if(p.dias && p.dias.length && !p.dias.includes(fromIso(fecha).getDay())) return false;
   return !noTengo.has(p.medio);

@@ -27,6 +27,7 @@ Los datos que cargás desde la app quedan **en ese dispositivo** (localStorage).
   "minimo": 0,                    // compra mínima
   "costo": 0,                     // costo extra (ej. spread cripto), 0.0075 = 0,75%
   "grupo": "nx-epico",            // opcional: promos que comparten el mismo tope
+  "desde": "2026-10-01",          // opcional: empieza a valer ese día
   "vence": "2026-09-30",
   "nota": "Plan Épico."
 }
