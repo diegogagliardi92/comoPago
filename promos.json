@@ -79,8 +79,9 @@
     "costo": 0,
     "grupo": "lemon",
     "vence": "",
-    "nota": "0,25% en BTC desde el 1/9/2026. Tope $40.000/mes compartido (subió desde $30.000). Sin confirmar si el % sigue en 0,25% o volvió a 0,5%: fuentes 2026 mencionan ambos esquemas.",
-    "rubro": "*"
+    "nota": "0,25% en BTC desde el 1/9/2026 (confirmado: antes era 0,5%). Tope $40.000/mes compartido.",
+    "rubro": "*",
+    "fuente": "https://www.cronista.com/finanzas-mercados/las-tarjetas-que-te-devuelven-plata-cada-vez-que-compras-como-funciona-en-argentina/"
   },
   {
     "id": "lemon-cripto",
@@ -237,9 +238,10 @@
     "minimo": 0,
     "costo": 0,
     "grupo": "nx-epico",
-    "vence": "2026-09-30",
+    "vence": "2026-10-31",
     "nota": "Plan Épico. Tope semanal compartido con Jumbo.",
-    "rubro": "Supermercados"
+    "rubro": "Supermercados",
+    "fuente": "https://www.naranjax.com/plan-epico"
   },
   {
     "id": "nx-changomas",
@@ -316,9 +318,68 @@
     "periodo": "mes",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
+    "vence": "2026-10-31",
+    "nota": "Compra mínima $100.000 (cifra sin reconfirmar este mes, se mantiene de meses anteriores).",
+    "rubro": "Supermercados",
+    "fuente": "https://hacetecliente.macro.com.ar/"
+  },
+  {
+    "id": "macro-coto",
+    "medio": "Macro",
+    "donde": [
+      "Coto"
+    ],
+    "dias": [
+      2
+    ],
+    "pct": 0.25,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-31",
+    "nota": "Débito Visa por NFC, dentro del programa MODO. Sin tope.",
+    "rubro": "Supermercados",
+    "fuente": "https://hacetecliente.macro.com.ar/"
+  },
+  {
+    "id": "macro-changomas",
+    "medio": "Macro",
+    "donde": [
+      "ChangoMás"
+    ],
+    "dias": [
+      1
+    ],
+    "pct": 0.2,
+    "tope": 25000,
+    "periodo": "mes",
+    "minimo": 75000,
+    "costo": 0,
+    "vence": "2026-10-31",
     "nota": "",
-    "rubro": "Supermercados"
+    "rubro": "Supermercados",
+    "fuente": "https://hacetecliente.macro.com.ar/"
+  },
+  {
+    "id": "modo-dia",
+    "medio": "MODO",
+    "donde": [
+      "Día"
+    ],
+    "dias": [
+      5,
+      6
+    ],
+    "pct": 0.2,
+    "tope": 20000,
+    "periodo": "mes",
+    "minimo": 35000,
+    "costo": 0,
+    "vence": "2026-10-31",
+    "nota": "Viernes y sábados. Tope por banco por mes; reintegro acreditado dentro de los 30 días. Vigente del 01/06/26 al 31/10/26.",
+    "rubro": "Supermercados",
+    "fuente": "https://www.modo.com.ar/promos/superdia-septiembre26"
   },
   {
     "id": "modo-jumbo",
@@ -416,9 +477,10 @@
     "periodo": "semana",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
+    "vence": "2026-10-31",
     "nota": "",
-    "rubro": "Comercio de barrio"
+    "rubro": "Comercio de barrio",
+    "fuente": "https://www.bancoprovincia.com.ar/Noticias/MasNoticias/una-por-una-las-promos-de-cuenta-dni-en-octubre-3322"
   },
   {
     "id": "dni-ferias",
@@ -432,9 +494,10 @@
     "periodo": "semana",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
+    "vence": "2026-10-31",
     "nota": "Ferias y mercados bonaerenses.",
-    "rubro": "Ferias y mercados"
+    "rubro": "Ferias y mercados",
+    "fuente": "https://www.bancoprovincia.com.ar/Noticias/MasNoticias/una-por-una-las-promos-de-cuenta-dni-en-octubre-3322"
   },
   {
     "id": "dni-gastro",
@@ -489,9 +552,10 @@
     "periodo": null,
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
+    "vence": "2026-10-31",
     "nota": "Sin tope.",
-    "rubro": "Farmacias y perfumerías"
+    "rubro": "Farmacias y perfumerías",
+    "fuente": "https://www.bancoprovincia.com.ar/Noticias/MasNoticias/una-por-una-las-promos-de-cuenta-dni-en-octubre-3322"
   },
   {
     "id": "dni-libreria",
@@ -508,9 +572,10 @@
     "periodo": null,
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
+    "vence": "2026-10-31",
     "nota": "Textos escolares. Sin tope. Una fuente (sin confirmar con una segunda) indica que esta promo podría regir sin cambios hasta el 29/12/2026.",
-    "rubro": "Librerías"
+    "rubro": "Librerías",
+    "fuente": "https://www.bancoprovincia.com.ar/Noticias/MasNoticias/una-por-una-las-promos-de-cuenta-dni-en-octubre-3322"
   },
   {
     "id": "dni-vete",
@@ -526,9 +591,10 @@
     "periodo": "semana",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
+    "vence": "2026-10-31",
     "nota": "",
-    "rubro": "Mascotas"
+    "rubro": "Mascotas",
+    "fuente": "https://www.bancoprovincia.com.ar/Noticias/MasNoticias/una-por-una-las-promos-de-cuenta-dni-en-octubre-3322"
   },
   {
     "id": "dni-garrafa",
@@ -542,9 +608,10 @@
     "periodo": "mes",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
+    "vence": "2026-10-31",
     "nota": "",
-    "rubro": "Garrafas"
+    "rubro": "Garrafas",
+    "fuente": "https://www.bancoprovincia.com.ar/Noticias/MasNoticias/una-por-una-las-promos-de-cuenta-dni-en-octubre-3322"
   },
   {
     "id": "galicia-changomas",
@@ -953,5 +1020,43 @@
     "segmento": [
       "Éminent"
     ]
+  },
+  {
+    "id": "dni-dia",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "Día"
+    ],
+    "dias": [
+      1
+    ],
+    "pct": 0.2,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-31",
+    "nota": "Pagando con tarjeta de crédito Visa de Banco Provincia por NFC desde la app. Sin tope de reintegro.",
+    "rubro": "Supermercados",
+    "fuente": "https://www.bancoprovincia.com.ar/Noticias/MasNoticias/una-por-una-las-promos-de-cuenta-dni-en-octubre-3322"
+  },
+  {
+    "id": "dni-changomas",
+    "medio": "Cuenta DNI",
+    "donde": [
+      "ChangoMás"
+    ],
+    "dias": [
+      4
+    ],
+    "pct": 0.2,
+    "tope": null,
+    "periodo": null,
+    "minimo": 0,
+    "costo": 0,
+    "vence": "2026-10-31",
+    "nota": "Incluye sucursales MasGO. Pagando con tarjeta de crédito Visa de Banco Provincia por NFC desde la app. Sin tope de reintegro.",
+    "rubro": "Supermercados",
+    "fuente": "https://www.bancoprovincia.com.ar/Noticias/MasNoticias/una-por-una-las-promos-de-cuenta-dni-en-octubre-3322"
   }
 ]
