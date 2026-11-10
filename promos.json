@@ -416,9 +416,10 @@
     "periodo": "semana",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "",
-    "rubro": "Comercio de barrio"
+    "vence": "2026-11-30",
+    "nota": "Carnicerías, verdulerías y almacenes, de lunes a viernes.",
+    "rubro": "Comercio de barrio",
+    "fuente": "https://www.iprofesional.com/economia/468012-cuenta-dni-en-noviembre-todos-los-descuentos-reintegros-y-dias-para-ahorrar-hasta-40-por-ciento"
   },
   {
     "id": "dni-ferias",
@@ -432,9 +433,10 @@
     "periodo": "semana",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "Ferias y mercados bonaerenses.",
-    "rubro": "Ferias y mercados"
+    "vence": "2026-11-30",
+    "nota": "Ferias y mercados bonaerenses, todos los días.",
+    "rubro": "Ferias y mercados",
+    "fuente": "https://www.iprofesional.com/economia/468012-cuenta-dni-en-noviembre-todos-los-descuentos-reintegros-y-dias-para-ahorrar-hasta-40-por-ciento"
   },
   {
     "id": "dni-gastro",
@@ -451,9 +453,10 @@
     "periodo": "semana",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "",
-    "rubro": "Gastronomía"
+    "vence": "2026-11-30",
+    "nota": "Fin de semana.",
+    "rubro": "Gastronomía",
+    "fuente": "https://www.iprofesional.com/economia/468012-cuenta-dni-en-noviembre-todos-los-descuentos-reintegros-y-dias-para-ahorrar-hasta-40-por-ciento"
   },
   {
     "id": "dni-ypf",
@@ -489,9 +492,10 @@
     "periodo": null,
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
+    "vence": "2026-11-30",
     "nota": "Sin tope.",
-    "rubro": "Farmacias y perfumerías"
+    "rubro": "Farmacias y perfumerías",
+    "fuente": "https://www.iprofesional.com/economia/468012-cuenta-dni-en-noviembre-todos-los-descuentos-reintegros-y-dias-para-ahorrar-hasta-40-por-ciento"
   },
   {
     "id": "dni-libreria",
@@ -508,9 +512,10 @@
     "periodo": null,
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "Textos escolares. Sin tope. Una fuente (sin confirmar con una segunda) indica que esta promo podría regir sin cambios hasta el 29/12/2026.",
-    "rubro": "Librerías"
+    "vence": "2026-11-30",
+    "nota": "Textos escolares. Sin tope.",
+    "rubro": "Librerías",
+    "fuente": "https://www.iprofesional.com/economia/468012-cuenta-dni-en-noviembre-todos-los-descuentos-reintegros-y-dias-para-ahorrar-hasta-40-por-ciento"
   },
   {
     "id": "dni-vete",
@@ -526,9 +531,10 @@
     "periodo": "semana",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "",
-    "rubro": "Mascotas"
+    "vence": "2026-11-30",
+    "nota": "Pet shops y veterinarias.",
+    "rubro": "Mascotas",
+    "fuente": "https://www.iprofesional.com/economia/468012-cuenta-dni-en-noviembre-todos-los-descuentos-reintegros-y-dias-para-ahorrar-hasta-40-por-ciento"
   },
   {
     "id": "dni-garrafa",
