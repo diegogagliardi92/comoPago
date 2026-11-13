@@ -376,9 +376,10 @@
     "periodo": "semana",
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "",
-    "rubro": "Supermercados"
+    "vence": "2026-11-30",
+    "nota": "Para jubilados y pensionados.",
+    "rubro": "Supermercados",
+    "fuente": "https://www.infozona.com.ar/?p=408287"
   },
   {
     "id": "bna-changomas",
@@ -430,11 +431,12 @@
     "pct": 0.4,
     "tope": 6000,
     "periodo": "semana",
-    "minimo": 0,
+    "minimo": 15000,
     "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "Ferias y mercados bonaerenses.",
-    "rubro": "Ferias y mercados"
+    "vence": "2026-11-30",
+    "nota": "Ferias y mercados bonaerenses. Reintegro con ticket mínimo $15.000.",
+    "rubro": "Ferias y mercados",
+    "fuente": "https://derechadiario.com.ar/negocios-finanzas/cuenta-dni-listado-completo-promociones-ahorrar-noviembre-2026"
   },
   {
     "id": "dni-gastro",
@@ -508,9 +510,10 @@
     "periodo": null,
     "minimo": 0,
     "costo": 0,
-    "vence": "2026-09-30",
-    "nota": "Textos escolares. Sin tope. Una fuente (sin confirmar con una segunda) indica que esta promo podría regir sin cambios hasta el 29/12/2026.",
-    "rubro": "Librerías"
+    "vence": "2026-11-30",
+    "nota": "Textos escolares. Sin tope.",
+    "rubro": "Librerías",
+    "fuente": "https://derechadiario.com.ar/negocios-finanzas/cuenta-dni-listado-completo-promociones-ahorrar-noviembre-2026"
   },
   {
     "id": "dni-vete",
@@ -756,134 +759,6 @@
     "nota": "Más 3 cuotas sin interés. Pagando con QR de MODO (app Galicia o MODO).",
     "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/170412",
     "grupo": "galicia-puppis"
-  },
-  {
-    "id": "galicia-combustible",
-    "medio": "Galicia",
-    "rubro": "Combustible",
-    "donde": [
-      "YPF",
-      "Shell",
-      "Axion",
-      "Puma"
-    ],
-    "dias": [],
-    "pct": 0.1,
-    "tope": 10000,
-    "periodo": "dia",
-    "minimo": 0,
-    "costo": 0,
-    "vence": "2026-10-10",
-    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo.",
-    "fechas": [
-      "2026-09-28",
-      "2026-10-10"
-    ],
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181917",
-    "grupo": "galicia-combustible"
-  },
-  {
-    "id": "galicia-colectivo-oct",
-    "medio": "Galicia",
-    "rubro": "Transporte",
-    "donde": [
-      "Colectivo"
-    ],
-    "dias": [],
-    "pct": 1.0,
-    "tope": 25000,
-    "periodo": "mes",
-    "minimo": 0,
-    "costo": 0,
-    "vence": "2026-10-31",
-    "nota": "100% en octubre. Mastercard por NFC (Apple/Google Pay, app Galicia o MODO).",
-    "desde": "2026-10-01",
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181251"
-  },
-  {
-    "id": "galicia-combustible-eminent",
-    "medio": "Galicia",
-    "rubro": "Combustible",
-    "donde": [
-      "YPF",
-      "Shell",
-      "Axion",
-      "Puma"
-    ],
-    "dias": [],
-    "pct": 0.15,
-    "tope": 15000,
-    "periodo": "dia",
-    "minimo": 0,
-    "costo": 0,
-    "vence": "2026-10-10",
-    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo.",
-    "fechas": [
-      "2026-09-28",
-      "2026-10-10"
-    ],
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181918",
-    "grupo": "galicia-combustible",
-    "segmento": [
-      "Éminent"
-    ]
-  },
-  {
-    "id": "galicia-combustible-haberes",
-    "medio": "Galicia",
-    "rubro": "Combustible",
-    "donde": [
-      "YPF",
-      "Shell",
-      "Axion",
-      "Puma"
-    ],
-    "dias": [],
-    "pct": 0.2,
-    "tope": 15000,
-    "periodo": "dia",
-    "minimo": 0,
-    "costo": 0,
-    "vence": "2026-10-10",
-    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo.",
-    "fechas": [
-      "2026-09-28",
-      "2026-10-10"
-    ],
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181919",
-    "grupo": "galicia-combustible",
-    "segmento": [
-      "Haberes"
-    ]
-  },
-  {
-    "id": "galicia-combustible-eminent-haberes",
-    "medio": "Galicia",
-    "rubro": "Combustible",
-    "donde": [
-      "YPF",
-      "Shell",
-      "Axion",
-      "Puma"
-    ],
-    "dias": [],
-    "pct": 0.25,
-    "tope": 20000,
-    "periodo": "dia",
-    "minimo": 0,
-    "costo": 0,
-    "vence": "2026-10-10",
-    "nota": "Solo esas fechas. Mastercard con QR MODO o NFC (Apple/Google Pay). Tope por día de promo.",
-    "fechas": [
-      "2026-09-28",
-      "2026-10-10"
-    ],
-    "fuente": "https://loyalty.bff.bancogalicia.com.ar/api/portal/catalogo/v1/promociones/idPromocion/181920",
-    "grupo": "galicia-combustible",
-    "segmento": [
-      "Éminent",
-      "Haberes"
-    ]
   },
   {
     "id": "galicia-puppis-eminent",
